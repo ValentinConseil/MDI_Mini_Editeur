@@ -1,8 +1,9 @@
 package commands;
 
 import controleur.Buffer;
+import enregistreur.Enregistrable;
 
-public interface Command {
+public interface Command extends Enregistrable{
 	
 	public void exec();
 }

@@ -1,6 +1,7 @@
 package vue;
 
 import controleur.Buffer;
+import enregistreur.Enregistreur;
 
 public interface IHM {
 
@@ -9,6 +10,7 @@ public interface IHM {
 	public int getFinSelection();
 	public void update();
 	public String getText();
-	
+	public void addMacros(int id);
 	public void setBuffer(Buffer buffer);
+	public Enregistreur getEnregistreur();
 }

@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -16,6 +17,7 @@ import javax.swing.event.DocumentListener;
 
 import commands.*;
 import controleur.Buffer;
+import enregistreur.Enregistreur;
 
 public class IHMImplGraphique extends JFrame  implements IHM { 
 
@@ -24,9 +26,17 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	private Command coller;
 	private Command inserer;
 	private Command selecteur;
+	
+	private Command rejouer;
+	private Command stopEnregistreur;
+	private Command startEnregistreur;
+	
 	private JTextArea textArea;
 	private Buffer buffer;
+	private JComboBox listeMacros;
 
+	private Enregistreur enregistreurCourant;
+	
 	public void setCommandCopier(Command copier) {
 		this.copier = copier;
 	}
@@ -46,6 +56,19 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	public void setCommandSelecteur(Command selecteur) {
 		this.selecteur = selecteur;
 	}
+	
+	public void setCommandRejouer(Command rejouer) {
+		this.rejouer=rejouer;
+	}
+
+	public void setCommandStartEnregistrement(Command enregistrement) {
+		this.startEnregistreur=enregistrement;
+	}
+
+	public void setCommandStopEnregistrement(Command stopenregistrement) {
+		this.stopEnregistreur=stopenregistrement;
+	}
+
 
 	public int getDebutSelection(){
 		return textArea.getSelectionStart();
@@ -79,6 +102,26 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		JButton boutonCouper = new JButton("Couper");
 		upperPanel.add(boutonCouper);
 
+		JButton boutonStartEnregistreur = new JButton("Start enregistrement");
+		upperPanel.add(boutonStartEnregistreur);
+		
+		JButton boutonStopEnregistreur = new JButton("Stop enregistrement");
+		upperPanel.add(boutonStopEnregistreur);
+		
+		listeMacros = new JComboBox<>();
+		upperPanel.add(listeMacros);
+		
+		listeMacros.addActionListener(
+                new ActionListener(){
+                    public void actionPerformed(ActionEvent e){
+                        JComboBox combo = (JComboBox)e.getSource();
+                        enregistreurCourant = buffer.getEnregistreur(combo.getSelectedIndex());
+                        rejouer.exec();
+                    }
+                }            
+        );
+		
+		
 		textArea = new JTextArea("",50,50);
 
 		lowerPanel.add(textArea);
@@ -115,6 +158,19 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 				couper.exec();
 			} 
 		});
+		
+		boutonStartEnregistreur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+                enregistreurCourant = buffer.addEnregistreur();
+				startEnregistreur.exec();
+			}
+		});
+		
+		boutonStopEnregistreur.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {    
+				stopEnregistreur.exec();
+			}
+		});
 
 
 		textArea.addCaretListener(new CaretListener() {
@@ -130,9 +186,7 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 	@Override
 	public void update() {
-
-		textArea.setText(buffer.getText());
-		
+		textArea.setText(buffer.getText());		
 	}
 
 	@Override
@@ -143,6 +197,16 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	@Override
 	public void setBuffer(Buffer buffer) {
 		this.buffer=buffer;
+	}
+
+	@Override
+	public void addMacros(int id) {
+		listeMacros.addItem("Macro "+id);
+	}
+
+	@Override
+	public Enregistreur getEnregistreur() {
+		return this.enregistreurCourant;
 	}
 
 }

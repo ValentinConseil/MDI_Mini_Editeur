@@ -1,5 +1,9 @@
 package controleur;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import enregistreur.Enregistreur;
 import vue.IHM;
 
 public class Buffer{
@@ -7,6 +11,7 @@ public class Buffer{
 	
 	private PressePapier pressePapier = new PressePapierImpl();
 	private Selecteur selecteur = new SelecteurImpl(this);
+	private List<Enregistreur> listEnregistreur = new ArrayList<Enregistreur>();
 	private IHM ihm;
 	
 	private String content;
@@ -51,9 +56,19 @@ public class Buffer{
 	public Buffer(IHM ihm) {
 		this.ihm=ihm;
 	}
+	
+	public Enregistreur getEnregistreur(int id){
+		return listEnregistreur.get(id);
+	}
+	
 	public String getText() {
 		System.out.println("conent:"+content);
 		return content;
+	}
+	public Enregistreur addEnregistreur() {
+		Enregistreur enregistreur = new Enregistreur();
+		listEnregistreur.add(enregistreur);
+		return enregistreur;
 	}
 	
 	
