@@ -12,5 +12,7 @@ public interface IHM {
 	public String getText();
 	public void addMacros(int id);
 	public void setBuffer(Buffer buffer);
+	public String getCaractereInsere();
 	public Enregistreur getEnregistreur();
+	public int getPositionCurseur();
 }

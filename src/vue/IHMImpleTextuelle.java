@@ -47,4 +47,16 @@ public class IHMImpleTextuelle implements IHM{
 		return null;
 	}
 
+
+	@Override
+	public String getCaractereInsere() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	public int getPositionCurseur() {
+		return 0;
+	}
+	
+	
+
 }

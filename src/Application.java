@@ -30,7 +30,7 @@ public class Application {
 		Command selecteur = new Selection(buffer);
 		Command couper = new Couper(buffer);
 		
-		Command rejouer = new Rejouer(ihm);
+		Command rejouer = new Rejouer(buffer);
 		Command enregistrement = new StartEnregistrement(ihm);
 		Command stopenregistrement = new StopEnregistrement(ihm);
 

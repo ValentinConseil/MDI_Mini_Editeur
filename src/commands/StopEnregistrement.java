@@ -16,5 +16,6 @@ public class StopEnregistrement implements Command {
 	public void exec() {
 		this.enregistreur = ihm.getEnregistreur();
 		this.enregistreur.stopEnregistrement();
+		
 	}
 }

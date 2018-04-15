@@ -3,21 +3,39 @@ package enregistreur;
 import java.util.ArrayList;
 import java.util.List;
 
+import controleur.Buffer;
+
 public class Enregistreur {
 	List<Enregistrement> listEnregistrement = new ArrayList<>();
+	boolean enregistrement_en_cours = false;
 
 	public void stopEnregistrement() {
-		System.out.println("stop");		
+		enregistrement_en_cours = false;
 	}
 
 	public void startEnregistrement() {
-		System.out.println("start");		
-		
+		enregistrement_en_cours = true;		
 	}
 
-	public void rejouer() {
+	
+	public void rejouer(Buffer buffer) {
 		for (Enregistrement enregistrement : listEnregistrement) {
-			enregistrement.
+			//ihm doit le faire
+			buffer.setMemento(enregistrement);
+			
 		}		
 	}
+
+	public boolean isEnregistrement_en_cours() {
+		return enregistrement_en_cours;
+	}
+
+	public void setEnregistrement_en_cours(boolean enregistrement_en_cours) {
+		this.enregistrement_en_cours = enregistrement_en_cours;
+	}
+	
+	public void addEnregistrement(Enregistrement e) {
+		this.listEnregistrement.add(e);
+	}
+	
 }

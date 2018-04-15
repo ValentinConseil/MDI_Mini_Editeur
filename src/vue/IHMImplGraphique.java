@@ -4,7 +4,10 @@ import java.awt.BorderLayout;
 import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -26,17 +29,23 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	private Command coller;
 	private Command inserer;
 	private Command selecteur;
-	
+
 	private Command rejouer;
 	private Command stopEnregistreur;
 	private Command startEnregistreur;
-	
+
 	private JTextArea textArea;
 	private Buffer buffer;
 	private JComboBox listeMacros;
 
+	int compteurMacro = 0;
+
+	boolean testActionListenerActive = true;
+
+	String caractereInsere = "";
+
 	private Enregistreur enregistreurCourant;
-	
+
 	public void setCommandCopier(Command copier) {
 		this.copier = copier;
 	}
@@ -56,7 +65,7 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	public void setCommandSelecteur(Command selecteur) {
 		this.selecteur = selecteur;
 	}
-	
+
 	public void setCommandRejouer(Command rejouer) {
 		this.rejouer=rejouer;
 	}
@@ -86,60 +95,80 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		setTitle("Mini-Editeur");
 		setSize(700, 500);
 
-		JPanel upperPanel = new JPanel();
-		JPanel lowerPanel = new JPanel();
+		JPanel firstLine = new JPanel();
+		JPanel secondLine = new JPanel();
 
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.setLayout(new BorderLayout()); 
-		this.add(BorderLayout.NORTH,upperPanel);
-		this.add(BorderLayout.CENTER,lowerPanel);
-
+		this.setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS)); 
+		this.add(firstLine);
+		this.add(secondLine);
 
 		JButton boutonColler = new JButton("Coller");
-		upperPanel.add(boutonColler);
+		firstLine.add(boutonColler);
 		JButton boutonCopier = new JButton("Copier");
-		upperPanel.add(boutonCopier);
+		firstLine.add(boutonCopier);
 		JButton boutonCouper = new JButton("Couper");
-		upperPanel.add(boutonCouper);
+		firstLine.add(boutonCouper);
 
 		JButton boutonStartEnregistreur = new JButton("Start enregistrement");
-		upperPanel.add(boutonStartEnregistreur);
-		
+		secondLine.add(boutonStartEnregistreur);
+
 		JButton boutonStopEnregistreur = new JButton("Stop enregistrement");
-		upperPanel.add(boutonStopEnregistreur);
-		
+		boutonStopEnregistreur.setEnabled(false);
+		secondLine.add(boutonStopEnregistreur);
+
 		listeMacros = new JComboBox<>();
-		upperPanel.add(listeMacros);
-		
+		secondLine.add(listeMacros);
+
 		listeMacros.addActionListener(
-                new ActionListener(){
-                    public void actionPerformed(ActionEvent e){
-                        JComboBox combo = (JComboBox)e.getSource();
-                        enregistreurCourant = buffer.getEnregistreur(combo.getSelectedIndex());
-                        rejouer.exec();
-                    }
-                }            
-        );
+				new ActionListener(){
+					public void actionPerformed(ActionEvent e){
+
+						if(testActionListenerActive) {
+							JComboBox combo = (JComboBox)e.getSource();
+							buffer.setSelectedMacro(combo.getSelectedIndex());
+							System.out.println("event macro");
+							rejouer.exec();
+						}
+					}
+				}            
+				);
+
+
+		textArea = new JTextArea("",1,50);
+		textArea.setWrapStyleWord(true);
+		this.add(textArea);
 		
+		textArea.addKeyListener(new KeyListener() {
+
+			@Override
+			public void keyTyped(KeyEvent e) {
+
 		
-		textArea = new JTextArea("",50,50);
 
-		lowerPanel.add(textArea);
-
-
-		textArea.getDocument().addDocumentListener(new DocumentListener() {
-			public void changedUpdate(DocumentEvent e) {
-				warn();
-			}
-			public void removeUpdate(DocumentEvent e) {
-				warn();
-			}
-			public void insertUpdate(DocumentEvent e) {
-				warn();
+				
 			}
 
-			public void warn() {
-				inserer.exec();
+			@Override
+			public void keyReleased(KeyEvent e) {
+				int key= e.getKeyCode();
+				System.out.println("key pressed"+key);
+
+				if((((key>=65)&&(key<=90)) || key == 32 ||((key>=97)&&(key<=122))||((key>=48)&&(key<=57))))
+				{
+					caractereInsere = e.getKeyChar()+"";
+					inserer.exec();
+				}
+				else if (key == 8) {//Backspace
+					caractereInsere = e.getKeyChar()+"";
+					inserer.exec();
+				}
+			}
+			@Override
+			public void keyPressed(KeyEvent e) {
+				
+			
 			}
 		});
 
@@ -158,17 +187,25 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 				couper.exec();
 			} 
 		});
-		
+
 		boutonStartEnregistreur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-                enregistreurCourant = buffer.addEnregistreur();
+				boutonStartEnregistreur.setEnabled(false);
+				boutonStopEnregistreur.setEnabled(true);
+				enregistreurCourant = buffer.addEnregistreur();
 				startEnregistreur.exec();
+
 			}
 		});
-		
+
 		boutonStopEnregistreur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {    
+			public void actionPerformed(ActionEvent e) {
+				boutonStartEnregistreur.setEnabled(true);
+				boutonStopEnregistreur.setEnabled(false);
 				stopEnregistreur.exec();
+				testActionListenerActive=false;
+				addMacros(++compteurMacro);
+				testActionListenerActive=true;
 			}
 		});
 
@@ -176,7 +213,6 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		textArea.addCaretListener(new CaretListener() {
 			@Override
 			public void caretUpdate(CaretEvent e) {
-				int length = textArea.getSelectionEnd() - textArea.getSelectionStart();                
 				selecteur.exec();
 			}
 		});
@@ -186,13 +222,24 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 	@Override
 	public void update() {
-		textArea.setText(buffer.getText());		
+		int positionCurseur = textArea.getCaretPosition();
+		textArea.setText(buffer.getText());
+		
+		if(positionCurseur > textArea.getText().length())
+		{
+			textArea.setCaretPosition(textArea.getText().length());
+		}
+		else {
+			textArea.setCaretPosition(positionCurseur);
+		}
 	}
 
 	@Override
 	public String getText() {
 		return textArea.getText();
 	}
+
+	
 
 	@Override
 	public void setBuffer(Buffer buffer) {
@@ -207,6 +254,14 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	@Override
 	public Enregistreur getEnregistreur() {
 		return this.enregistreurCourant;
+	}
+
+	public String getCaractereInsere() {
+		return caractereInsere;
+	}
+
+	public int getPositionCurseur() {
+		return textArea.getCaretPosition();
 	}
 
 }

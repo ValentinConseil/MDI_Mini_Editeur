@@ -24,8 +24,7 @@ public class SelecteurImpl implements Selecteur{
 
 	@Override
 	public String lire() {
-		System.out.println("Lire slecteur : " + buffer.getContent().substring(debut, fin) + " "+ debut + " " + fin );
-		return buffer.getContent().substring(debut, fin);
+		return buffer.getText().substring(debut, fin);
 	}
 
 	@Override
