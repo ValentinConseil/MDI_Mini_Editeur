@@ -2,7 +2,7 @@ package enregistreur;
 
 import commands.Command;
 
-public class Enregistrement {
+public class MementoCommande {
 	
 	private Command commande;
 	private String text = "";

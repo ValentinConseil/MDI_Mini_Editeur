@@ -13,8 +13,11 @@ public class Selection implements Command{
 		buffer.selection();
 	}
 
-	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+	@Override
+	public void unexec() {
+		
 	}
+	
+	
 
 }

@@ -12,9 +12,10 @@ public class Copier implements Command{
 	public void exec() {
 		buffer.copier();
 	}
-
-	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+	
+	@Override
+	public void unexec() {
+		this.buffer.decopier();
 	}
 
 }

@@ -1,7 +1,7 @@
 package vue;
 
 import controleur.Buffer;
-import enregistreur.Enregistreur;
+import enregistreur.EnregistreurMacro;
 
 public class IHMImpleTextuelle implements IHM{
 
@@ -33,18 +33,6 @@ public class IHMImpleTextuelle implements IHM{
 	public void setBuffer(Buffer buffer) {
 		// TODO Auto-generated method stub
 		
-	}
-
-	@Override
-	public void addMacros(int id) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public Enregistreur getEnregistreur() {
-		// TODO Auto-generated method stub
-		return null;
 	}
 
 

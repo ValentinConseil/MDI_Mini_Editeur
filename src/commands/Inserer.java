@@ -13,8 +13,10 @@ public class Inserer implements Command{
 		buffer.inserer();
 	}
 
-	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+	@Override
+	public void unexec() {
+		this.buffer.deinserer();
 	}
 
+	
 }

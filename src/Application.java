@@ -10,7 +10,7 @@ import commands.Selection;
 import commands.StartEnregistrement;
 import commands.StopEnregistrement;
 import controleur.Buffer;
-import enregistreur.Enregistreur;
+import enregistreur.EnregistreurMacro;
 import vue.IHMImplGraphique;
 
 public class Application {
@@ -20,33 +20,8 @@ public class Application {
 		
 		IHMImplGraphique ihm = new IHMImplGraphique();
 		Buffer buffer= new Buffer(ihm);
-		Enregistreur enregistreur = new Enregistreur(); 
 		
-		ihm.setBuffer(buffer);
-		
-		Command copier = new Copier(buffer);
-		Command coller = new Coller(buffer);
-		Command inserer = new Inserer(buffer);
-		Command selecteur = new Selection(buffer);
-		Command couper = new Couper(buffer);
-		
-		Command rejouer = new Rejouer(buffer);
-		Command enregistrement = new StartEnregistrement(ihm);
-		Command stopenregistrement = new StopEnregistrement(ihm);
-
-		
-		ihm.setCommandColler(coller);
-		ihm.setCommandCopier(copier);
-		ihm.setCommandCouper(couper);
-		ihm.setCommandInserer(inserer);
-		ihm.setCommandSelecteur(selecteur);
-		
-		ihm.setCommandRejouer(rejouer);
-		ihm.setCommandStartEnregistrement(enregistrement);
-		ihm.setCommandStopEnregistrement(stopenregistrement);
-
-		
-		
+		ihm.setBuffer(buffer);		
 		ihm.show();
 	}
 	

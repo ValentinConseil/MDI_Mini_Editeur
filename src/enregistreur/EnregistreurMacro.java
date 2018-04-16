@@ -5,9 +5,12 @@ import java.util.List;
 
 import controleur.Buffer;
 
-public class Enregistreur {
-	List<Enregistrement> listEnregistrement = new ArrayList<>();
-	boolean enregistrement_en_cours = false;
+public class EnregistreurMacro {
+	
+	
+	
+	private List<MementoCommande> listEnregistrement = new ArrayList<>();
+	private boolean enregistrement_en_cours = false;
 
 	public void stopEnregistrement() {
 		enregistrement_en_cours = false;
@@ -19,7 +22,7 @@ public class Enregistreur {
 
 	
 	public void rejouer(Buffer buffer) {
-		for (Enregistrement enregistrement : listEnregistrement) {
+		for (MementoCommande enregistrement : listEnregistrement) {
 			//ihm doit le faire
 			buffer.setMemento(enregistrement);
 			
@@ -34,7 +37,7 @@ public class Enregistreur {
 		this.enregistrement_en_cours = enregistrement_en_cours;
 	}
 	
-	public void addEnregistrement(Enregistrement e) {
+	public void addEnregistrement(MementoCommande e) {
 		this.listEnregistrement.add(e);
 	}
 	

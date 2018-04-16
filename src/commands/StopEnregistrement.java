@@ -1,21 +1,27 @@
 package commands;
 
-import enregistreur.Enregistreur;
+import controleur.Buffer;
+import enregistreur.EnregistreurMacro;
+import enregistreur.ListEnregistrementMacro;
 import vue.IHM;
 
 public class StopEnregistrement implements Command {
 
-	Enregistreur enregistreur;
-	private IHM ihm;
+
+	private Buffer buffer;
 	
-	public StopEnregistrement(IHM ihm) {
-		this.ihm = ihm;
+	public StopEnregistrement(Buffer buffer) {
+		this.buffer = buffer;
 	}
 
 	@Override
 	public void exec() {
-		this.enregistreur = ihm.getEnregistreur();
-		this.enregistreur.stopEnregistrement();
+		this.buffer.getListEnregistreurMacro().getMacro(buffer.getListEnregistreurMacro().getNbMacro()-1).stopEnregistrement();
+	}
+
+	@Override
+	public void unexec() {
+		// TODO Auto-generated method stub
 		
 	}
 }

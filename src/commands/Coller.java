@@ -13,9 +13,10 @@ public class Coller implements Command{
 	public void exec() {
 		buffer.coller();
 	}
-
-	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+	
+	@Override
+	public void unexec() {
+		this.buffer.decoller();
 	}
 
 }

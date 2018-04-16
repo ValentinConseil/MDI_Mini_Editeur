@@ -15,8 +15,9 @@ public class Couper implements Command{
 		buffer.couper();
 	}
 
-	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+	@Override
+	public void unexec() {
+		this.buffer.decouper();
 	}
 
 }
