@@ -95,7 +95,6 @@ public class Buffer{
 			content = content.substring(0,selecteur.getDebut())+pressePapier.lire()+content.substring(selecteur.getDebut(),content.length());
 		}
 
-		//ihm doit le faire
 		if(listMacro.isRecording()) {
 			listMacro.addEnregistrement(createMemento(new Coller(this),pressePapier.lire()));
 		}
@@ -112,7 +111,7 @@ public class Buffer{
 		String character = ihm.getCaractereInsere();
 
 		if(rejoue) {
-			position = enregistrementCourant.getCurseurPosition();
+			position = enregistrementCourant.getDebutSelection();
 			character = enregistrementCourant.getText();
 		}
 
@@ -166,8 +165,6 @@ public class Buffer{
 		enr.setFinSelection(selecteur.getFin());
 		enr.setCommande(commande);
 		enr.setText(text);
-		enr.setCurseurPosition(selecteur.getDebut());
-		System.out.println("enregistrement : "+selecteur.getDebut()+" "+selecteur.getFin());
 		return enr;
 	}
 
@@ -224,20 +221,20 @@ public class Buffer{
 
 
 	public void decoller() {
-		content = content.substring(0,enregistrementCourant.getCurseurPosition())+content.substring(enregistrementCourant.getCurseurPosition()+enregistrementCourant.getText().length(),content.length());
+		content = content.substring(0,enregistrementCourant.getDebutSelection())+content.substring(enregistrementCourant.getDebutSelection()+enregistrementCourant.getText().length(),content.length());
 		int newCursorPosition = enregistrementCourant.getFinSelection();
 		ihm.update();
 		ihm.setCursorPosition(newCursorPosition);
 	}
 	public void decouper() {		
-		content = content.substring(0,enregistrementCourant.getCurseurPosition())+enregistrementCourant.getText()+content.substring(enregistrementCourant.getCurseurPosition(),content.length());
+		content = content.substring(0,enregistrementCourant.getDebutSelection())+enregistrementCourant.getText()+content.substring(enregistrementCourant.getDebutSelection(),content.length());
 		int newCursorPosition = enregistrementCourant.getDebutSelection()+enregistrementCourant.getText().length();
 		ihm.update();
 		ihm.setCursorPosition(newCursorPosition);
 	}
 	public void deinserer() {
 
-		content = content.substring(0,enregistrementCourant.getCurseurPosition())+content.substring(enregistrementCourant.getCurseurPosition()+1,content.length());
+		content = content.substring(0,enregistrementCourant.getDebutSelection())+content.substring(enregistrementCourant.getDebutSelection()+1,content.length());
 		int newCursorPosition = enregistrementCourant.getDebutSelection();
 		ihm.update();
 		ihm.setCursorPosition(newCursorPosition);
@@ -251,14 +248,15 @@ public class Buffer{
 
 	//Fonctions utilitaire
 
-	private String removeCharacter(int i) {
+	private String removeCharacters(int start,int end) {
 
-		String deletedCharacter = ""+content.charAt(i);
+		System.out.println("suppression de "+start+" à "+end);
+		
+		String deletedCharacters = content.substring(start,end);
 
-		StringBuilder sb = new StringBuilder(content).deleteCharAt(i);
-		content = sb.toString();
+		content = content.substring(0,start)+content.substring(end,content.length());
 
-		return deletedCharacter;
+		return deletedCharacters;
 	}
 
 
@@ -274,40 +272,49 @@ public class Buffer{
 
 	public void supprimer() {
 
-		int position = selecteur.getDebut()-1;
-
-		if(position>=0) {
+		int startPosition = selecteur.getDebut();
+		int endPosition = selecteur.getFin();
+				
+		if(startPosition>0) {
 			if(rejoue) {
-				position = enregistrementCourant.getCurseurPosition();
+				startPosition = enregistrementCourant.getDebutSelection();
+				endPosition = enregistrementCourant.getFinSelection();
 			}
 
-			System.out.println("Suppression at "+position);
-			String deletedCharacter = removeCharacter(position);
+			if(startPosition == endPosition) {
+				startPosition--;
+			}
+			String deletedCharacters = removeCharacters(startPosition,endPosition);
 
 			//Si on enregistre une macro -> on l'ajoute à l'enregistrement
 			if(listMacro.isRecording()) {
-				listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacter));
+				listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacters));
 			}
 
 			//On l'ajoute à l'historique des commandes 
-			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacter),!rejoue);
+			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacters),!rejoue);
 
-			int newCursorPosition = selecteur.getFin()-1;
 			ihm.update();
-			ihm.setCursorPosition(newCursorPosition);
+			ihm.setCursorPosition(startPosition);
 		}
 	}
 
 
 	public void desupprimer() {
 
-		int position = enregistrementCourant.getCurseurPosition()-1;
-		String character = enregistrementCourant.getText();
+		int positionStart = enregistrementCourant.getDebutSelection();
+		int positionEnd = enregistrementCourant.getFinSelection();
 
-		content = new StringBuilder(content).insert(position, character).toString();
+		if(positionEnd==positionStart) {
+			positionStart--;
+		}
+		
+		String character = enregistrementCourant.getText();
+		
+		content = new StringBuilder(content).insert(positionStart, character).toString();
 
 		ihm.update();
-		ihm.setCursorPosition(position+1);
+		ihm.setCursorPosition(positionEnd);
 	}
 
 

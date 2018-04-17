@@ -7,15 +7,7 @@ public class MementoCommande {
 	private Command commande;
 	private String text = "";
 	
-	int debutSelection, finSelection, curseurPosition;
-
-	public int getCurseurPosition() {
-		return curseurPosition;
-	}
-
-	public void setCurseurPosition(int curseurPosition) {
-		this.curseurPosition = curseurPosition;
-	}
+	private int debutSelection, finSelection;
 
 	public int getDebutSelection() {
 		return debutSelection;
