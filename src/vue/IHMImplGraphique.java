@@ -80,6 +80,9 @@ public class IHMImplGraphique extends JFrame implements IHM {
 
 		JButton boutonColler = new JButton("Coller");
 		firstLine.add(boutonColler);
+		boutonColler.setEnabled(false);
+		
+		
 		JButton boutonCopier = new JButton("Copier");
 		firstLine.add(boutonCopier);
 		JButton boutonCouper = new JButton("Couper");
@@ -161,11 +164,13 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		});
 		boutonCopier.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boutonColler.setEnabled(true);
 				copier.exec();
 			}
 		});
 		boutonCouper.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				boutonColler.setEnabled(true);
 				couper.exec();
 			}
 		});
