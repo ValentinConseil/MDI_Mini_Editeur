@@ -110,7 +110,7 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 						if(testActionListenerActive) {
 							JComboBox<String> combo = (JComboBox)e.getSource();
-						//	rejouer.setMacro(combo.getSelectedIndex());
+							buffer.setSelectedMacro(combo.getSelectedIndex());
 							rejouer.exec();
 						}
 					}
@@ -211,18 +211,8 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 	@Override
 	public void update() {
-		int positionCurseur = textArea.getCaretPosition();
 		textArea.setText(buffer.getText());
-		/*
-		if(positionCurseur > textArea.getText().length())
-		{
-			textArea.setCaretPosition(textArea.getText().length());
-		}
-		else {
-			textArea.setCaretPosition(positionCurseur+1);
-		}*/
 		textArea.getCaret().setVisible(true);		
-
 	}
 	
 	public void setCursorPosition(int position) {
@@ -234,7 +224,7 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	@Override
 	public String getText() {
 		return textArea.getText();
-	}
+	} 
 
 	@Override
 	public void setBuffer(Buffer buffer) {

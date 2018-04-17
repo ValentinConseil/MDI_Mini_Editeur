@@ -39,6 +39,9 @@ public class Buffer{
 	//Flag indiquant si la la commande en cours est rejoué
 	private boolean rejoue = false;	
 
+	
+	private int selectedMacro = -1;
+	
 
 	public Buffer(IHM ihm) {
 		this.ihm=ihm;
@@ -140,8 +143,8 @@ public class Buffer{
 	/**
 	 * Rejoue la macro selectionnée
 	 */
-	public void rejouer(int idMacro) {
-		listMacro.getMacro(idMacro).rejouer(this);
+	public void rejouer() {
+		listMacro.getMacro(selectedMacro).rejouer(this);
 	}
 
 	/**
@@ -305,6 +308,11 @@ public class Buffer{
 
 		ihm.update();
 		ihm.setCursorPosition(position+1);
+	}
+
+
+	public void setSelectedMacro(int selectedIndex) {
+		this.selectedMacro = selectedIndex;
 	}
 
 
