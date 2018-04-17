@@ -129,9 +129,9 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 			public void keyReleased(KeyEvent e) {
 				int key= e.getKeyCode();
 				System.out.println("key pressed"+key);
-
+				//Mettre dans inserer ?
 				//Caractères [a-zA-Z]
-				if((((key>=65)&&(key<=90)) || key == 32 ||((key>=97)&&(key<=122))||((key>=48)&&(key<=57))))
+				if((((key>=65)&&(key<=90)) || key == 10 || key == 32 ||((key>=97)&&(key<=122))||((key>=48)&&(key<=57))))
 				{
 					caractereInsere = e.getKeyChar()+"";
 					inserer.exec();
