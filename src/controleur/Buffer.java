@@ -55,44 +55,57 @@ public class Buffer{
 			listMacro.addEnregistrement(createMemento(new Copier(this),""));
 		}
 
-		enregistreurUndoRedo.addCommand(createMemento(new Copier(this),""),!rejoue);
+		//enregistreurUndoRedo.addCommand(createMemento(new Copier(this),""),!rejoue);
 
 	}
 	public void couper(){
 
 		System.out.println("couper "+ selecteur.lire());
 
+		String deletedCharacters = selecteur.lire();
 
 		pressePapier.ecrire(selecteur.lire());
 		content = content.substring(0,selecteur.getDebut())+content.substring(selecteur.getFin(),content.length());
 
 		if(listMacro.isRecording()) {
-			listMacro.addEnregistrement(createMemento(new Couper(this),""));
+			listMacro.addEnregistrement(createMemento(new Couper(this),deletedCharacters));
 		}
 
-		enregistreurUndoRedo.addCommand(createMemento(new Couper(this),""),!rejoue);
+		enregistreurUndoRedo.addCommand(createMemento(new Couper(this),deletedCharacters),!rejoue);
 
+		int newCursorPosition = selecteur.getDebut();
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
 	}
 	public void coller(){
 
 		System.out.println("coller "+ pressePapier.lire());
 
+		int newCursorPosition;
 
-		content = content.substring(0,selecteur.getDebut())+pressePapier.lire()+content.substring(selecteur.getDebut(),content.length());
+		if(rejoue) {
+			newCursorPosition = selecteur.getFin()+enregistrementCourant.getText().length();
+			content = content.substring(0,selecteur.getDebut())+enregistrementCourant.getText()+content.substring(selecteur.getDebut(),content.length());
+		}
+		else {
+			newCursorPosition = selecteur.getFin()+pressePapier.lire().length();
+			content = content.substring(0,selecteur.getDebut())+pressePapier.lire()+content.substring(selecteur.getDebut(),content.length());
+		}
 
 		//ihm doit le faire
 		if(listMacro.isRecording()) {
-			listMacro.addEnregistrement(createMemento(new Coller(this),""));
+			listMacro.addEnregistrement(createMemento(new Coller(this),pressePapier.lire()));
 		}
 
-		enregistreurUndoRedo.addCommand(createMemento(new Coller(this),""),!rejoue);
+		enregistreurUndoRedo.addCommand(createMemento(new Coller(this),pressePapier.lire()),!rejoue);
 
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
+
 	}
 	public void inserer(){
 
-		int position = ihm.getPositionCurseur();
+		int position = selecteur.getDebut();
 		String character = ihm.getCaractereInsere();
 
 		if(rejoue) {
@@ -111,7 +124,9 @@ public class Buffer{
 		//On l'ajoute à l'historique des commandes 
 		enregistreurUndoRedo.addCommand(createMemento(new Inserer(this),character),!rejoue);
 
+		int newCursorPosition = selecteur.getFin()+1;
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
 
 	}
 
@@ -148,10 +163,9 @@ public class Buffer{
 		enr.setFinSelection(selecteur.getFin());
 		enr.setCommande(commande);
 		enr.setText(text);
-		enr.setCurseurPosition(ihm.getPositionCurseur());
-
+		enr.setCurseurPosition(selecteur.getDebut());
+		System.out.println("enregistrement : "+selecteur.getDebut()+" "+selecteur.getFin());
 		return enr;
-
 	}
 
 
@@ -207,18 +221,24 @@ public class Buffer{
 
 
 	public void decoller() {
-
-		content = content.substring(0,selecteur.getDebut())+content.substring(selecteur.getFin(),content.length());
+		content = content.substring(0,enregistrementCourant.getCurseurPosition())+content.substring(enregistrementCourant.getCurseurPosition()+enregistrementCourant.getText().length(),content.length());
+		int newCursorPosition = enregistrementCourant.getFinSelection();
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
 	}
-	public void decouper() {
-		content = content.substring(0,selecteur.getDebut())+content.substring(selecteur.getFin(),content.length());
+	public void decouper() {		
+		content = content.substring(0,enregistrementCourant.getCurseurPosition())+enregistrementCourant.getText()+content.substring(enregistrementCourant.getCurseurPosition(),content.length());
+		int newCursorPosition = enregistrementCourant.getDebutSelection()+enregistrementCourant.getText().length();
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
 	}
 	public void deinserer() {
 
 		content = content.substring(0,enregistrementCourant.getCurseurPosition())+content.substring(enregistrementCourant.getCurseurPosition()+1,content.length());
+		int newCursorPosition = enregistrementCourant.getDebutSelection();
 		ihm.update();
+		ihm.setCursorPosition(newCursorPosition);
+		
 	}
 	public void decopier() {
 
@@ -251,38 +271,40 @@ public class Buffer{
 
 	public void supprimer() {
 
-		int position = ihm.getPositionCurseur()-1;
+		int position = selecteur.getDebut()-1;
 
-		if(rejoue) {
-			position = enregistrementCourant.getCurseurPosition();
+		if(position>=0) {
+			if(rejoue) {
+				position = enregistrementCourant.getCurseurPosition();
+			}
+
+			System.out.println("Suppression at "+position);
+			String deletedCharacter = removeCharacter(position);
+
+			//Si on enregistre une macro -> on l'ajoute à l'enregistrement
+			if(listMacro.isRecording()) {
+				listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacter));
+			}
+
+			//On l'ajoute à l'historique des commandes 
+			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacter),!rejoue);
+
+			int newCursorPosition = selecteur.getFin()-1;
+			ihm.update();
+			ihm.setCursorPosition(newCursorPosition);
 		}
-
-		System.out.println("Suppression at "+position);
-		String deletedCharacter = removeCharacter(position);
-
-		//Si on enregistre une macro -> on l'ajoute à l'enregistrement
-		if(listMacro.isRecording()) {
-			listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacter));
-		}
-
-		//On l'ajoute à l'historique des commandes 
-		enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacter),!rejoue);
-
-		ihm.update();
 	}
 
 
 	public void desupprimer() {
 
-		int position = enregistrementCourant.getCurseurPosition();
+		int position = enregistrementCourant.getCurseurPosition()-1;
 		String character = enregistrementCourant.getText();
 
-
-		System.out.println("DeSup "+character+" at "+position+" content = "+content);
 		content = new StringBuilder(content).insert(position, character).toString();
 
-
 		ihm.update();
+		ihm.setCursorPosition(position+1);
 	}
 
 

@@ -18,6 +18,7 @@ public class Supprimer implements Command{
 
 	@Override
 	public void unexec() {
+		System.out.println("Dessuprimer");
 		this.buffer.desupprimer();
 	}
 

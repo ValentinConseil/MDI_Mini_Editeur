@@ -44,6 +44,12 @@ public class IHMImpleTextuelle implements IHM{
 	public int getPositionCurseur() {
 		return 0;
 	}
+
+	@Override
+	public void setCursorPosition(int position) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 

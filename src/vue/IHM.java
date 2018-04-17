@@ -12,5 +12,5 @@ public interface IHM {
 	public String getText();
 	public void setBuffer(Buffer buffer);
 	public String getCaractereInsere();
-	public int getPositionCurseur();
+	public void setCursorPosition(int position);
 }

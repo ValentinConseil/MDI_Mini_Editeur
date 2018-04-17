@@ -120,7 +120,6 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 		//Configuration du textArea
 		textArea = new JTextArea("",1,50);
-		textArea.setWrapStyleWord(true);
 		textArea.getCaret().setVisible(true);		
 		textArea.addKeyListener(new KeyListener() {
 
@@ -214,15 +213,23 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	public void update() {
 		int positionCurseur = textArea.getCaretPosition();
 		textArea.setText(buffer.getText());
-		
+		/*
 		if(positionCurseur > textArea.getText().length())
 		{
 			textArea.setCaretPosition(textArea.getText().length());
 		}
 		else {
 			textArea.setCaretPosition(positionCurseur+1);
-		}
+		}*/
+		textArea.getCaret().setVisible(true);		
+
 	}
+	
+	public void setCursorPosition(int position) {
+		textArea.setCaretPosition(position);
+		textArea.getCaret().setVisible(true);		
+	}
+	
 
 	@Override
 	public String getText() {
