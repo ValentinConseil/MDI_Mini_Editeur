@@ -2,12 +2,13 @@ package commands;
 
 import controleur.Buffer;
 
-public class Selection implements Command{
+public class Selection implements Command {
 	private Buffer buffer;
 
 	public Selection(Buffer buffer) {
-		this.buffer=buffer;
+		this.buffer = buffer;
 	}
+
 	@Override
 	public void exec() {
 		buffer.selection();
@@ -15,9 +16,7 @@ public class Selection implements Command{
 
 	@Override
 	public void unexec() {
-		
+
 	}
-	
-	
 
 }

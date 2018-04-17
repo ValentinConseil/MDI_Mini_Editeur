@@ -1,13 +1,10 @@
 package vue;
 
-import java.awt.BorderLayout;
-import java.awt.FlowLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 
-import javax.security.auth.Subject;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -16,16 +13,21 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.event.CaretEvent;
 import javax.swing.event.CaretListener;
-import javax.swing.event.DocumentEvent;
-import javax.swing.event.DocumentListener;
 
-import commands.*;
+import commands.Coller;
+import commands.Command;
+import commands.Copier;
+import commands.Couper;
+import commands.Inserer;
+import commands.Rejouer;
+import commands.Selection;
+import commands.StartEnregistrement;
+import commands.StopEnregistrement;
+import commands.Supprimer;
 import controleur.Buffer;
-import enregistreur.EnregistreurMacro;
-import enregistreur.EnregistreurUndoRedo;
 import enregistreur.ListEnregistrementMacro;
 
-public class IHMImplGraphique extends JFrame  implements IHM { 
+public class IHMImplGraphique extends JFrame implements IHM {
 
 	private Command copier;
 	private Command couper;
@@ -41,32 +43,29 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 	private JTextArea textArea;
 	private Buffer buffer;
 
-	boolean testActionListenerActive = true;
+	private boolean testActionListenerActive = true;
 
-	String caractereInsere = "";
+	private String caractereInsere = "";
 
-	//List des macros 
+	// List des macros
 	private ListEnregistrementMacro listEnregistreurMacro;
 	private JComboBox<String> listeMacros;
 
-	public int getDebutSelection(){
+	public int getDebutSelection() {
 		return textArea.getSelectionStart();
 	}
 
-	public int getFinSelection(){
+	public int getFinSelection() {
 		return textArea.getSelectionEnd();
 	}
-	public int getInsertion(){
-		return 0;
+
+	public IHMImplGraphique() {
+		buildUI();
+		this.show();
 	}
 
-	public IHMImplGraphique(){
-		buildUI();
-	}
-	
 	private void buildUI() {
-		
-		
+
 		setTitle("Mini-Editeur");
 		setSize(700, 500);
 
@@ -75,7 +74,7 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
-		this.setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS)); 
+		this.setLayout(new BoxLayout(getContentPane(), BoxLayout.PAGE_AXIS));
 		this.add(firstLine);
 		this.add(secondLine);
 
@@ -91,7 +90,6 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		JButton boutonRedo = new JButton("Redo");
 		secondLine.add(boutonRedo);
 
-		
 		JButton boutonStartEnregistreur = new JButton("Start enregistrement");
 		secondLine.add(boutonStartEnregistreur);
 
@@ -99,50 +97,49 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		boutonStopEnregistreur.setEnabled(false);
 		secondLine.add(boutonStopEnregistreur);
 
-		
-		//Configuration de la liste des macros
+		// Configuration de la liste des macros
 		listeMacros = new JComboBox<>();
 		secondLine.add(listeMacros);
 
-		listeMacros.addActionListener(
-				new ActionListener(){
-					public void actionPerformed(ActionEvent e){
+		listeMacros.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 
-						if(testActionListenerActive) {
-							JComboBox<String> combo = (JComboBox)e.getSource();
-						//	rejouer.setMacro(combo.getSelectedIndex());
-							rejouer.exec();
-						}
-					}
-				}            
-				);
+				if (testActionListenerActive) {
+					JComboBox<String> combo = (JComboBox) e.getSource();
+					buffer.setSelectedMacro(combo.getSelectedIndex());
+					rejouer.exec();
+				}
+			}
+		});
 
-
-		//Configuration du textArea
-		textArea = new JTextArea("",1,50);
-		textArea.getCaret().setVisible(true);		
+		// Configuration du textArea
+		textArea = new JTextArea("", 1, 50);
+		textArea.getCaret().setVisible(true);
 		textArea.addKeyListener(new KeyListener() {
 
 			@Override
-			public void keyTyped(KeyEvent e) {}
+			public void keyTyped(KeyEvent e) {
+			}
+
 			@Override
 			public void keyReleased(KeyEvent e) {
-				int key= e.getKeyCode();
-				System.out.println("key pressed"+key);
-
-				//Caractères [a-zA-Z]
-				if((((key>=65)&&(key<=90)) || key == 32 ||((key>=97)&&(key<=122))||((key>=48)&&(key<=57))))
-				{
-					caractereInsere = e.getKeyChar()+"";
+				int key = e.getKeyCode();
+				System.out.println("key pressed" + key);
+				// Mettre dans inserer ?
+				// Caractères [a-zA-Z]
+				if ((((key >= 65) && (key <= 90)) || key == 10 || key == 32 || ((key >= 97) && (key <= 122))
+						|| ((key >= 48) && (key <= 57)))) {
+					caractereInsere = e.getKeyChar() + "";
 					inserer.exec();
-				}
-				else if (key == 8) {//Backspace
-					caractereInsere = e.getKeyChar()+"";
+				} else if (key == 8) {// Backspace
+					caractereInsere = e.getKeyChar() + "";
 					supprimer.exec();
 				}
 			}
+
 			@Override
-			public void keyPressed(KeyEvent e) {}
+			public void keyPressed(KeyEvent e) {
+			}
 		});
 
 		textArea.addCaretListener(new CaretListener() {
@@ -153,38 +150,38 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 		});
 
 		textArea.setEditable(false);
-		
+
 		this.add(textArea);
 
-		//Défnitions des listeners des boutons
-		boutonColler.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
+		// Défnitions des listeners des boutons
+		boutonColler.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				coller.exec();
-			} 
+			}
 		});
-		boutonCopier.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
+		boutonCopier.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				copier.exec();
-			} 
+			}
 		});
-		boutonCouper.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
+		boutonCouper.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				couper.exec();
-			} 
+			}
 		});
 
-		boutonUndo.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
+		boutonUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				buffer.undo();
-			} 
+			}
 		});
-		
-		boutonRedo.addActionListener(new ActionListener() { 
-			public void actionPerformed(ActionEvent e) { 
+
+		boutonRedo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
 				buffer.redo();
-			} 
+			}
 		});
-		
+
 		boutonStartEnregistreur.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boutonStartEnregistreur.setEnabled(false);
@@ -200,36 +197,25 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 				boutonStartEnregistreur.setEnabled(true);
 				boutonStopEnregistreur.setEnabled(false);
 				stopEnregistreur.exec();
-				testActionListenerActive=false;
-				listeMacros.addItem("Macro "+listEnregistreurMacro.getNbMacro());
-				testActionListenerActive=true;
+				testActionListenerActive = false;
+				listeMacros.addItem("Macro " + listEnregistreurMacro.getNbMacro());
+				testActionListenerActive = true;
 			}
 		});
-		
+
 		this.setVisible(true);
 	}
 
 	@Override
 	public void update() {
-		int positionCurseur = textArea.getCaretPosition();
 		textArea.setText(buffer.getText());
-		/*
-		if(positionCurseur > textArea.getText().length())
-		{
-			textArea.setCaretPosition(textArea.getText().length());
-		}
-		else {
-			textArea.setCaretPosition(positionCurseur+1);
-		}*/
-		textArea.getCaret().setVisible(true);		
-
+		textArea.getCaret().setVisible(true);
 	}
-	
+
 	public void setCursorPosition(int position) {
 		textArea.setCaretPosition(position);
-		textArea.getCaret().setVisible(true);		
+		textArea.getCaret().setVisible(true);
 	}
-	
 
 	@Override
 	public String getText() {
@@ -238,33 +224,27 @@ public class IHMImplGraphique extends JFrame  implements IHM {
 
 	@Override
 	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
-		
+		this.buffer = buffer;
 
 		this.listEnregistreurMacro = buffer.getListEnregistreurMacro();
-		
+
 		this.coller = new Coller(buffer);
 		this.copier = new Copier(buffer);
-		
+
 		this.couper = new Couper(buffer);
 		this.inserer = new Inserer(buffer);
 		this.selecteur = new Selection(buffer);
-		
+
 		this.supprimer = new Supprimer(buffer);
-		
+
 		this.rejouer = new Rejouer(buffer);
 		this.startEnregistreur = new StartEnregistrement(buffer);
 		this.stopEnregistreur = new StopEnregistrement(buffer);
-		
-	}
 
+	}
 
 	public String getCaractereInsere() {
 		return caractereInsere;
-	}
-
-	public int getPositionCurseur() {
-		return textArea.getCaretPosition();
 	}
 
 }

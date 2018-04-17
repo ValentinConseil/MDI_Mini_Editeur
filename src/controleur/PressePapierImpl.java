@@ -1,9 +1,10 @@
 package controleur;
 
-public class PressePapierImpl implements PressePapier{
+public class PressePapierImpl implements PressePapier {
 
 	private Buffer buffer;
 	private String content;
+
 	@Override
 	public String lire() {
 		return content;
@@ -17,7 +18,7 @@ public class PressePapierImpl implements PressePapier{
 	@Override
 	public void setBuffer(Buffer buffer) {
 		this.buffer = buffer;
-		
+
 	}
 
 }

@@ -1,49 +1,14 @@
 package enregistreur;
 
-import java.util.ArrayList;
-import java.util.List;
+public interface ListEnregistrementMacro {
 
-import commands.Command;
+	public void addEnregistrement(MementoCommande enr);
 
-public class ListEnregistrementMacro {
+	public EnregistreurMacro getMacro(int id);
 
-	private List<EnregistreurMacro> listEnregistreur = new ArrayList<EnregistreurMacro>();
+	public int getNbMacro();
 
-	
-	
+	public EnregistreurMacro newMacro();
 
-	public void addEnregistrement(MementoCommande enr) {
-		if(listEnregistreur.size()>0) {
-			if(listEnregistreur.get(listEnregistreur.size()-1).isEnregistrement_en_cours()) {
-				listEnregistreur.get(listEnregistreur.size()-1).addEnregistrement(enr);
-			}
-		}
-	}
-
-
-	public EnregistreurMacro getMacro(int id) {
-		return listEnregistreur.get(id);
-	}
-	
-	/**
-	 * Retourne le nombre de macro
-	 * @return
-	 */
-	public int getNbMacro() {
-		return listEnregistreur.size();
-	}
-
-
-	public EnregistreurMacro newMacro() {
-		listEnregistreur.add(new EnregistreurMacro());
-		return listEnregistreur.get(listEnregistreur.size()-1);
-	}
-
-
-	public boolean isRecording() {
-		if(listEnregistreur.isEmpty()) {
-			return false;
-		}
-		return listEnregistreur.get(listEnregistreur.size()-1).isEnregistrement_en_cours();
-	}
+	public boolean isRecording();
 }

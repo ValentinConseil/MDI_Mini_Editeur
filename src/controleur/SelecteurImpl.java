@@ -1,25 +1,23 @@
 package controleur;
 
-import vue.IHM;
-
-public class SelecteurImpl implements Selecteur{
+public class SelecteurImpl implements Selecteur {
 
 	private Buffer buffer;
 	private int debut;
 	private int fin;
-	
+
 	public SelecteurImpl(Buffer buffer) {
-		this.buffer=buffer;
+		this.buffer = buffer;
 	}
-	
+
 	@Override
 	public void setDebut(int debut) {
-		this.debut=debut;
+		this.debut = debut;
 	}
 
 	@Override
 	public void setFin(int fin) {
-		this.fin=fin;
+		this.fin = fin;
 	}
 
 	@Override
@@ -29,10 +27,11 @@ public class SelecteurImpl implements Selecteur{
 
 	@Override
 	public void setBuffer(Buffer buffer) {
-		this.buffer=buffer;
+		this.buffer = buffer;
 	}
-	
-	public int getDebut(){
+
+	@Override
+	public int getDebut() {
 		return debut;
 	}
 
@@ -40,5 +39,5 @@ public class SelecteurImpl implements Selecteur{
 	public int getFin() {
 		return fin;
 	}
-	
+
 }

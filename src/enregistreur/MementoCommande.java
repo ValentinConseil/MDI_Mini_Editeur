@@ -3,19 +3,11 @@ package enregistreur;
 import commands.Command;
 
 public class MementoCommande {
-	
+
 	private Command commande;
 	private String text = "";
-	
-	int debutSelection, finSelection, curseurPosition;
 
-	public int getCurseurPosition() {
-		return curseurPosition;
-	}
-
-	public void setCurseurPosition(int curseurPosition) {
-		this.curseurPosition = curseurPosition;
-	}
+	private int debutSelection, finSelection;
 
 	public int getDebutSelection() {
 		return debutSelection;
@@ -24,7 +16,7 @@ public class MementoCommande {
 	public void setDebutSelection(int debutSelection) {
 		this.debutSelection = debutSelection;
 	}
-	
+
 	public Command getCommande() {
 		return commande;
 	}
@@ -40,12 +32,13 @@ public class MementoCommande {
 	public void setFinSelection(int finSelection) {
 		this.finSelection = finSelection;
 	}
-	
+
 	public String getText() {
 		return text;
 	}
+
 	public void setText(String text) {
 		this.text = text;
 	}
-	
+
 }
