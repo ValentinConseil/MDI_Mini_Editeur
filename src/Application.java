@@ -24,5 +24,4 @@ public class Application {
 		ihm.setBuffer(buffer);		
 		ihm.show();
 	}
-	
 }

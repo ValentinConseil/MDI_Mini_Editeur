@@ -248,14 +248,13 @@ public class Buffer{
 
 	//Fonctions utilitaire
 
-	private String removeCharacter(int i) {
+	private String removeCharacter(int debut, int fin) {
 
-		String deletedCharacter = ""+content.charAt(i);
+		String deletedCharacters = ""+content.substring(debut,fin);
 
-		StringBuilder sb = new StringBuilder(content).deleteCharAt(i);
-		content = sb.toString();
+		content = content.substring(0,debut)+content.substring(fin,content.length());
 
-		return deletedCharacter;
+		return deletedCharacters;
 	}
 
 
@@ -271,27 +270,28 @@ public class Buffer{
 
 	public void supprimer() {
 
-		int position = selecteur.getDebut()-1;
+		int positionDebut = selecteur.getDebut();
+		int positionFin = selecteur.getFin();
 
-		if(position>=0) {
+		if(positionDebut>=0) {
 			if(rejoue) {
-				position = enregistrementCourant.getCurseurPosition();
+				positionDebut = enregistrementCourant.getDebutSelection();
+				positionFin = enregistrementCourant.getDebutSelection();
 			}
 
-			System.out.println("Suppression at "+position);
-			String deletedCharacter = removeCharacter(position);
+			System.out.println("Suppression at "+positionDebut);
+			String deletedCharacters = removeCharacter(positionDebut, positionFin);
 
 			//Si on enregistre une macro -> on l'ajoute à l'enregistrement
 			if(listMacro.isRecording()) {
-				listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacter));
+				listMacro.addEnregistrement(createMemento(new Supprimer(this),deletedCharacters));
 			}
 
 			//On l'ajoute à l'historique des commandes 
-			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacter),!rejoue);
+			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this),deletedCharacters),!rejoue);
 
-			int newCursorPosition = selecteur.getFin()-1;
 			ihm.update();
-			ihm.setCursorPosition(newCursorPosition);
+			ihm.setCursorPosition(positionDebut);
 		}
 	}
 
