@@ -1,12 +1,16 @@
 package enregistreur;
 
 import commands.Command;
-
+/**
+ * Memento de l'interface commande
+ * Sauvegarde la position de la sélection/curseur, le texte utilisé par la commande
+ * et la commande
+ */
 public class MementoCommande {
 
+	
 	private Command commande;
 	private String text = "";
-
 	private int debutSelection, finSelection;
 
 	public int getDebutSelection() {

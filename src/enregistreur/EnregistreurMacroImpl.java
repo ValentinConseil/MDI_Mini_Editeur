@@ -5,6 +5,11 @@ import java.util.List;
 
 import controleur.Buffer;
 
+/**
+ * 
+ * Caretaker des memento d'une macro
+ *
+ */
 public class EnregistreurMacroImpl implements EnregistreurMacro {
 
 	private List<MementoCommande> listEnregistrement = new ArrayList<>();
@@ -18,18 +23,28 @@ public class EnregistreurMacroImpl implements EnregistreurMacro {
 		enregistrement_en_cours = true;
 	}
 
+	/**
+	 * Rejouer les commandes contenue dans la macro
+	 * @param Buffer
+	 */
 	public void rejouer(Buffer buffer) {
 		for (MementoCommande enregistrement : listEnregistrement) {
-			// ihm doit le faire
 			buffer.setMemento(enregistrement);
-
 		}
 	}
 
+	/**
+	 * Indique si une macro est en cours d'enregistrement
+	 * @return boolean
+	 */
 	public boolean isEnregistrement_en_cours() {
 		return enregistrement_en_cours;
 	}
 
+	/**
+	 * active / désactive l'enregistrement
+	 * @param boolean activer
+	 */
 	public void setEnregistrement_en_cours(boolean enregistrement_en_cours) {
 		this.enregistrement_en_cours = enregistrement_en_cours;
 	}

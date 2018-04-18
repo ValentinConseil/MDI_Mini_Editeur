@@ -2,7 +2,6 @@ package controleur;
 
 public class PressePapierImpl implements PressePapier {
 
-	private Buffer buffer;
 	private String content;
 
 	@Override
@@ -13,12 +12,6 @@ public class PressePapierImpl implements PressePapier {
 	@Override
 	public void ecrire(String e) {
 		this.content = e;
-	}
-
-	@Override
-	public void setBuffer(Buffer buffer) {
-		this.buffer = buffer;
-
 	}
 
 }

@@ -29,41 +29,60 @@ import enregistreur.ListEnregistrementMacro;
 
 public class IHMImplGraphique extends JFrame implements IHM {
 
+	//Commandes
 	private Command copier;
 	private Command couper;
 	private Command coller;
 	private Command inserer;
 	private Command selecteur;
 	private Command supprimer;
-
 	private Command rejouer;
 	private Command stopEnregistreur;
 	private Command startEnregistreur;
 
+	//TextArea de l'éditeur
 	private JTextArea textArea;
+
+	//Buffer de l'éditer
 	private Buffer buffer;
 
-	private boolean testActionListenerActive = true;
+	//Flag pour bloquer le listener de la liste des macros
+	private boolean activeMacro = true;
 
+	//Dernier caractère inséré au clavier
 	private String caractereInsere = "";
-
-	// List des macros
-	private ListEnregistrementMacro listEnregistreurMacro;
-	private JComboBox<String> listeMacros;
-
-	public int getDebutSelection() {
-		return textArea.getSelectionStart();
-	}
-
-	public int getFinSelection() {
-		return textArea.getSelectionEnd();
-	}
 
 	public IHMImplGraphique() {
 		buildUI();
 		this.show();
 	}
 
+	/**
+	 * Configure le buffer et les commandes de l'ihm
+	 * @param Buffer buffer
+	 */
+	@Override
+	public void setBuffer(Buffer buffer) {
+		this.buffer = buffer;
+
+		this.coller = new Coller(buffer);
+		this.copier = new Copier(buffer);
+
+		this.couper = new Couper(buffer);
+		this.inserer = new Inserer(buffer);
+		this.selecteur = new Selection(buffer);
+
+		this.supprimer = new Supprimer(buffer);
+
+		this.rejouer = new Rejouer(buffer);
+		this.startEnregistreur = new StartEnregistrement(buffer);
+		this.stopEnregistreur = new StopEnregistrement(buffer);
+
+	}
+	
+	/**
+	 * Construit l'interface de l'éditeur
+	 */
 	private void buildUI() {
 
 		setTitle("Mini-Editeur");
@@ -78,13 +97,13 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		this.add(firstLine);
 		this.add(secondLine);
 
+		JButton boutonCopier = new JButton("Copier");
+		firstLine.add(boutonCopier);
+		
 		JButton boutonColler = new JButton("Coller");
 		firstLine.add(boutonColler);
 		boutonColler.setEnabled(false);
 		
-		
-		JButton boutonCopier = new JButton("Copier");
-		firstLine.add(boutonCopier);
 		JButton boutonCouper = new JButton("Couper");
 		firstLine.add(boutonCouper);
 
@@ -100,6 +119,9 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		boutonStopEnregistreur.setEnabled(false);
 		secondLine.add(boutonStopEnregistreur);
 
+		JComboBox<String> listeMacros;
+
+		
 		// Configuration de la liste des macros
 		listeMacros = new JComboBox<>();
 		secondLine.add(listeMacros);
@@ -107,7 +129,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		listeMacros.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				if (testActionListenerActive) {
+				if (activeMacro) {
 					JComboBox<String> combo = (JComboBox) e.getSource();
 					buffer.setSelectedMacro(combo.getSelectedIndex());
 					rejouer.exec();
@@ -127,8 +149,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 			@Override
 			public void keyReleased(KeyEvent e) {
 				int key = e.getKeyCode();
-				System.out.println("key pressed" + key);
-				// Mettre dans inserer ?
+				
 				// Caractères [a-zA-Z]
 				if ((((key >= 65) && (key <= 90)) || key == 10 || key == 32 || ((key >= 97) && (key <= 122))
 						|| ((key >= 48) && (key <= 57)))) {
@@ -149,6 +170,8 @@ public class IHMImplGraphique extends JFrame implements IHM {
 			@Override
 			public void caretUpdate(CaretEvent e) {
 				selecteur.exec();
+				textArea.getCaret().setVisible(true);
+
 			}
 		});
 
@@ -193,7 +216,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 				boutonStopEnregistreur.setEnabled(true);
 				buffer.newMacro();
 				startEnregistreur.exec();
-
+				listeMacros.setEnabled(false);
 			}
 		});
 
@@ -202,54 +225,49 @@ public class IHMImplGraphique extends JFrame implements IHM {
 				boutonStartEnregistreur.setEnabled(true);
 				boutonStopEnregistreur.setEnabled(false);
 				stopEnregistreur.exec();
-				testActionListenerActive = false;
-				listeMacros.addItem("Macro " + listEnregistreurMacro.getNbMacro());
-				testActionListenerActive = true;
+				activeMacro = false;
+				listeMacros.addItem("Macro " + buffer.getListEnregistreurMacro().getNbMacro());
+				activeMacro = true;
+				listeMacros.setEnabled(true);
+
 			}
 		});
 
 		this.setVisible(true);
 	}
 
+	/**
+	 * Met à jour l'ihm en fonction du buffer
+	 */
 	@Override
 	public void update() {
 		textArea.setText(buffer.getText());
 		textArea.getCaret().setVisible(true);
 	}
 
+	
+	
+	//Getters et setters de l'ihm 
+	
+	
 	public void setCursorPosition(int position) {
 		textArea.setCaretPosition(position);
 		textArea.getCaret().setVisible(true);
 	}
 
-	@Override
-	public String getText() {
-		return textArea.getText();
-	}
 
 	@Override
-	public void setBuffer(Buffer buffer) {
-		this.buffer = buffer;
-
-		this.listEnregistreurMacro = buffer.getListEnregistreurMacro();
-
-		this.coller = new Coller(buffer);
-		this.copier = new Copier(buffer);
-
-		this.couper = new Couper(buffer);
-		this.inserer = new Inserer(buffer);
-		this.selecteur = new Selection(buffer);
-
-		this.supprimer = new Supprimer(buffer);
-
-		this.rejouer = new Rejouer(buffer);
-		this.startEnregistreur = new StartEnregistrement(buffer);
-		this.stopEnregistreur = new StopEnregistrement(buffer);
-
-	}
-
 	public String getCaractereInsere() {
 		return caractereInsere;
 	}
 
+	@Override
+	public int getDebutSelection() {
+		return textArea.getSelectionStart();
+	}
+
+	@Override
+	public int getFinSelection() {
+		return textArea.getSelectionEnd();
+	}
 }
