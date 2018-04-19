@@ -2,11 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Inserer implements Command {
-	private Buffer buffer;
+public class Inserer extends CommandBuffer {
 
 	public Inserer(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override

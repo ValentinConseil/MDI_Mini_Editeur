@@ -2,12 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Supprimer implements Command {
-
-	private Buffer buffer;
+public class Supprimer extends CommandBuffer {
 
 	public Supprimer(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override

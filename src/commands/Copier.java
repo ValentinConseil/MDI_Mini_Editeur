@@ -2,11 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Copier implements Command {
-	private Buffer buffer;
+public class Copier extends CommandBuffer {
 
 	public Copier(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override
@@ -16,7 +15,7 @@ public class Copier implements Command {
 
 	@Override
 	public void unexec() {
-		this.buffer.decopier();
+		buffer.decopier();
 	}
 
 }

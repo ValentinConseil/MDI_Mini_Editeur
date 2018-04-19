@@ -94,6 +94,10 @@ public class BufferImpl implements Buffer {
 
 		int position = selecteur.getDebut();
 		String character = ihm.getCaractereInsere();
+		
+		if(rejoue) {
+			character = pressePapier.lire();
+		}
 
 		content = new StringBuilder(content).insert(position, character).toString();
 

@@ -2,14 +2,12 @@ package commands;
 
 import controleur.Buffer;
 
-public class StopEnregistrement implements Command {
-
-	private Buffer buffer;
+public class StopEnregistrement extends CommandBuffer {
 
 	public StopEnregistrement(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
-
+	
 	@Override
 	public void exec() {
 		this.buffer.getListEnregistreurMacro().getMacro(buffer.getListEnregistreurMacro().getNbMacro() - 1)

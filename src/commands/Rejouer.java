@@ -2,12 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Rejouer implements Command {
-
-	private Buffer buffer;
+public class Rejouer extends CommandBuffer {
 
 	public Rejouer(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override

@@ -2,11 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Selection implements Command {
-	private Buffer buffer;
+public class Selection extends CommandBuffer {
 
 	public Selection(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override

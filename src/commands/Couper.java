@@ -2,12 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Couper implements Command {
-
-	private Buffer buffer;
+public class Couper extends CommandBuffer {
 
 	public Couper(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override

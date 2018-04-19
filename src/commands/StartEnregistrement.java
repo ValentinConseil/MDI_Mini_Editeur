@@ -2,12 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class StartEnregistrement implements Command {
-
-	private Buffer buffer;
+public class StartEnregistrement extends CommandBuffer {
 
 	public StartEnregistrement(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override
