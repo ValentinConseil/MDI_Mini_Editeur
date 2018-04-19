@@ -1,6 +1,6 @@
 package enregistreur;
 
-import controleur.Buffer;
+import modele.Buffer;
 
 public interface EnregistreurMacro {
 

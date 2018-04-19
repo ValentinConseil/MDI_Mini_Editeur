@@ -3,7 +3,7 @@ package enregistreur;
 import java.util.ArrayList;
 import java.util.List;
 
-import controleur.Buffer;
+import modele.Buffer;
 
 /**
  * 

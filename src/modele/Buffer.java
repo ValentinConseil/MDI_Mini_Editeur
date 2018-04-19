@@ -1,4 +1,4 @@
-package controleur;
+package modele;
 
 import commands.Command;
 import enregistreur.EnregistreurMacro;

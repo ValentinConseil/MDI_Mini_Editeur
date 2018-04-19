@@ -1,4 +1,4 @@
-package controleur;
+package modele;
 
 import commands.Coller;
 import commands.Command;
@@ -6,6 +6,10 @@ import commands.Copier;
 import commands.Couper;
 import commands.Inserer;
 import commands.Supprimer;
+import controleur.PressePapier;
+import controleur.PressePapierImpl;
+import controleur.Selecteur;
+import controleur.SelecteurImpl;
 import enregistreur.EnregistreurMacro;
 import enregistreur.EnregistreurUndoRedo;
 import enregistreur.EnregistreurUndoRedoImpl;

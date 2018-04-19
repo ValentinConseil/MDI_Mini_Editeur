@@ -1,5 +1,7 @@
 package controleur;
 
+import modele.Buffer;
+
 public class SelecteurImpl implements Selecteur {
 
 	private Buffer buffer;

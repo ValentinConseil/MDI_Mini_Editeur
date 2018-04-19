@@ -30,7 +30,7 @@
   </interface>  
   <class id="4" language="java" name="enregistreur.EnregistreurUndoRedoImpl" project="MDI_Projet" 
     file="/MDI_Projet/src/enregistreur/EnregistreurUndoRedoImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="167" width="267" x="2948" y="37"/>    
+    <position height="167" width="267" x="2941" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -39,7 +39,7 @@
   </class>  
   <interface id="5" language="java" name="enregistreur.EnregistreurUndoRedo" project="MDI_Projet" 
     file="/MDI_Projet/src/enregistreur/EnregistreurUndoRedo.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="149" width="267" x="2531" y="595"/>    
+    <position height="149" width="267" x="2378" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -66,7 +66,7 @@
   </interface>  
   <class id="8" language="java" name="vue.IHMImplGraphique" project="MDI_Projet" 
     file="/MDI_Projet/src/vue/IHMImplGraphique.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3027" y="388"/>    
+    <position height="257" width="160" x="3038" y="280"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -84,7 +84,7 @@
   </interface>  
   <class id="10" language="java" name="Application" project="MDI_Projet" file="/MDI_Projet/src/Application.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="95" width="114" x="590" y="37"/>    
+    <position height="95" width="114" x="817" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -93,7 +93,7 @@
   </class>  
   <class id="11" language="java" name="commands.Coller" project="MDI_Projet" file="/MDI_Projet/src/commands/Coller.java" 
     binary="false" corner="BOTTOM_RIGHT">    
-    <position height="113" width="93" x="2699" y="280"/>    
+    <position height="113" width="93" x="362" y="37"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -102,7 +102,7 @@
   </class>  
   <interface id="12" language="java" name="commands.Command" project="MDI_Projet" 
     file="/MDI_Projet/src/commands/Command.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="-1" width="-1" x="3126" y="706"/>    
+    <position height="95" width="104" x="3038" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -181,18 +181,18 @@
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </class>  
-  <interface id="21" language="java" name="controleur.Buffer" project="MDI_Projet" 
-    file="/MDI_Projet/src/controleur/Buffer.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="419" width="295" x="2043" y="595"/>    
+  <interface id="21" language="java" name="modele.Buffer" project="MDI_Projet" file="/MDI_Projet/src/modele/Buffer.java" 
+    binary="false" corner="BOTTOM_RIGHT">    
+    <position height="419" width="295" x="1873" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
       <operations public="true" package="true" protected="true" private="true" static="true"/>    
     </display>  
   </interface>  
-  <class id="22" language="java" name="controleur.BufferImpl" project="MDI_Projet" 
-    file="/MDI_Projet/src/controleur/BufferImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="131" width="182" x="2156" y="280"/>    
+  <class id="22" language="java" name="modele.BufferImpl" project="MDI_Projet" 
+    file="/MDI_Projet/src/modele/BufferImpl.java" binary="false" corner="BOTTOM_RIGHT">    
+    <position height="131" width="182" x="2261" y="280"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -201,7 +201,7 @@
   </class>  
   <interface id="23" language="java" name="controleur.PressePapier" project="MDI_Projet" 
     file="/MDI_Projet/src/controleur/PressePapier.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="95" width="113" x="2378" y="595"/>    
+    <position height="95" width="113" x="2685" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -210,7 +210,7 @@
   </interface>  
   <class id="24" language="java" name="controleur.PressePapierImpl" project="MDI_Projet" 
     file="/MDI_Projet/src/controleur/PressePapierImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="131" width="126" x="2378" y="280"/>    
+    <position height="131" width="126" x="2685" y="280"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -219,7 +219,7 @@
   </class>  
   <interface id="25" language="java" name="controleur.Selecteur" project="MDI_Projet" 
     file="/MDI_Projet/src/controleur/Selecteur.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="167" width="130" x="1873" y="595"/>    
+    <position height="167" width="130" x="2208" y="595"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -228,7 +228,7 @@
   </interface>  
   <class id="26" language="java" name="controleur.SelecteurImpl" project="MDI_Projet" 
     file="/MDI_Projet/src/controleur/SelecteurImpl.java" binary="false" corner="BOTTOM_RIGHT">    
-    <position height="221" width="130" x="1958" y="280"/>    
+    <position height="221" width="130" x="2041" y="280"/>    
     <display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
       sort-features="false" accessors="true" visibility="true">      
       <attributes public="true" package="true" protected="true" private="true" static="true"/>      
@@ -245,20 +245,20 @@
     </display>  
   </class>  
   <association id="28">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="29" name="ihm">        
-        <position height="0" width="0" x="0" y="-51"/>      
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="29" name="selecteur">        
+        <position height="0" width="0" x="36" y="64"/>      
       </attribute>      
       <multiplicity id="30" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="-51"/>      
+        <position height="0" width="0" x="36" y="64"/>      
       </multiplicity>    
     </end>    
-    <end type="TARGET" refId="9" navigable="true"/>    
+    <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="31">    
-    <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="32" name="listUndo">        
+    <end type="SOURCE" refId="6" navigable="false">      
+      <attribute id="32" name="listEnregistrement">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
       <multiplicity id="33" minimum="0" maximum="2147483647">        
@@ -268,70 +268,71 @@
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="34">    
+  <realization id="34">    
+    <bendpoint x="1302" y="280"/>    
+    <end type="SOURCE" refId="6"/>    
+    <end type="TARGET" refId="7"/>  
+  </realization>  
+  <association id="35">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="35" name="couper">        
+      <attribute id="36" name="stopEnregistreur">        
         <position height="0" width="0" x="36" y="64"/>      
       </attribute>      
-      <multiplicity id="36" minimum="0" maximum="1">        
+      <multiplicity id="37" minimum="0" maximum="1">        
         <position height="0" width="0" x="36" y="64"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <association id="37">    
+  <association id="38">    
     <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="38" name="buffer">        
+      <attribute id="39" name="inserer">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="40" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="41">    
+    <end type="SOURCE" refId="15"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="42">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="43" name="startEnregistreur">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="44" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="45">    
+    <end type="SOURCE" refId="20"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="46">    
+    <end type="SOURCE" refId="26" navigable="false">      
+      <attribute id="47" name="buffer">        
         <position height="0" width="0" x="-16" y="166"/>      
       </attribute>      
-      <multiplicity id="39" minimum="0" maximum="1">        
+      <multiplicity id="48" minimum="0" maximum="1">        
         <position height="0" width="0" x="-16" y="166"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="21" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="40">    
-    <end type="SOURCE" refId="24"/>    
-    <end type="TARGET" refId="23"/>  
+  <realization id="49">    
+    <end type="SOURCE" refId="26"/>    
+    <end type="TARGET" refId="25"/>  
   </realization>  
-  <association id="41">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="42" name="selecteur">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="43" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="25" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="44">    
-    <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="45" name="enregistreurUndoRedo">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="46" minimum="0" maximum="1">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="5" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="47">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="48" name="copier">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="49" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
   <realization id="50">    
     <end type="SOURCE" refId="27"/>    
     <end type="TARGET" refId="12"/>  
@@ -349,227 +350,230 @@
     <display labels="true" multiplicity="true"/>  
   </association>  
   <association id="54">    
-    <end type="SOURCE" refId="27" navigable="false">      
-      <attribute id="55" name="buffer"/>      
-      <multiplicity id="56" minimum="0" maximum="1"/>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="57">    
-    <end type="SOURCE" refId="6" navigable="false">      
-      <attribute id="58" name="listEnregistrement">        
+    <end type="SOURCE" refId="4" navigable="false">      
+      <attribute id="55" name="listRedo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="59" minimum="0" maximum="2147483647">        
+      <multiplicity id="56" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="60">    
-    <end type="SOURCE" refId="26"/>    
-    <end type="TARGET" refId="25"/>  
+  <realization id="57">    
+    <end type="SOURCE" refId="24"/>    
+    <end type="TARGET" refId="23"/>  
   </realization>  
-  <realization id="61">    
+  <realization id="58">    
     <end type="SOURCE" refId="8"/>    
     <end type="TARGET" refId="9"/>  
   </realization>  
-  <association id="62">    
+  <realization id="59">    
+    <bendpoint x="2654" y="280"/>    
+    <end type="SOURCE" refId="4"/>    
+    <end type="TARGET" refId="5"/>  
+  </realization>  
+  <association id="60">    
     <end type="SOURCE" refId="4" navigable="false">      
-      <attribute id="63" name="listRedo">        
+      <attribute id="61" name="listUndo">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="64" minimum="0" maximum="2147483647">        
+      <multiplicity id="62" minimum="0" maximum="2147483647">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="1" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <realization id="65">    
-    <bendpoint x="1302" y="280"/>    
-    <end type="SOURCE" refId="6"/>    
-    <end type="TARGET" refId="7"/>  
-  </realization>  
-  <generalization id="66">    
-    <end type="SOURCE" refId="16"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <generalization id="67">    
-    <end type="SOURCE" refId="20"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <association id="68">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="69" name="startEnregistreur">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="70" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="71">    
-    <end type="SOURCE" refId="18"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <association id="72">    
-    <end type="SOURCE" refId="26" navigable="false">      
-      <attribute id="73" name="buffer">        
-        <position height="0" width="0" x="-16" y="166"/>      
-      </attribute>      
-      <multiplicity id="74" minimum="0" maximum="1">        
-        <position height="0" width="0" x="-16" y="166"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="21" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="75">    
-    <end type="SOURCE" refId="14"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <generalization id="76">    
-    <end type="SOURCE" refId="15"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <association id="77">    
-    <end type="SOURCE" refId="1" navigable="false">      
-      <attribute id="78" name="commande">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="79" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="80">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="81" name="stopEnregistreur">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="82" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="83">    
-    <end type="SOURCE" refId="22"/>    
-    <end type="TARGET" refId="21"/>  
-  </realization>  
-  <realization id="84">    
-    <bendpoint x="2668" y="280"/>    
-    <end type="SOURCE" refId="4"/>    
-    <end type="TARGET" refId="5"/>  
-  </realization>  
-  <association id="85">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="86" name="rejouer">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="87" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="88">    
-    <end type="SOURCE" refId="13"/>    
-    <end type="TARGET" refId="27"/>  
-  </generalization>  
-  <association id="89">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="90" name="supprimer">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="91" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <generalization id="92">    
+  <generalization id="63">    
     <end type="SOURCE" refId="19"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <association id="93">    
-    <end type="SOURCE" refId="2" navigable="false">      
-      <attribute id="94" name="listEnregistreur">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </attribute>      
-      <multiplicity id="95" minimum="0" maximum="2147483647">        
-        <position height="0" width="0" x="0" y="0"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="7" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="96">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="97" name="coller">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="98" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <association id="99">    
+  <association id="64">    
     <end type="SOURCE" refId="22" navigable="false">      
-      <attribute id="100" name="pressePapier">        
+      <attribute id="65" name="pressePapier">        
         <position height="0" width="0" x="0" y="0"/>      
       </attribute>      
-      <multiplicity id="101" minimum="0" maximum="1">        
+      <multiplicity id="66" minimum="0" maximum="1">        
         <position height="0" width="0" x="0" y="0"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="23" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
-  <generalization id="102">    
+  <association id="67">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="68" name="supprimer">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="69" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="70">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="71" name="copier">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="72" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="73">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="74" name="ihm">        
+        <position height="0" width="0" x="0" y="-51"/>      
+      </attribute>      
+      <multiplicity id="75" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="-51"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="9" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="76">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="77" name="enregistreurUndoRedo">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="78" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="5" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="79">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="80" name="rejouer">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="81" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="82">    
+    <end type="SOURCE" refId="27" navigable="false">      
+      <attribute id="83" name="buffer">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="84" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="85">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="86" name="buffer">        
+        <position height="0" width="0" x="-16" y="166"/>      
+      </attribute>      
+      <multiplicity id="87" minimum="0" maximum="1">        
+        <position height="0" width="0" x="-16" y="166"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="21" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="88">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="89" name="couper">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="90" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="91">    
+    <end type="SOURCE" refId="22" navigable="false">      
+      <attribute id="92" name="selecteur">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="93" minimum="0" maximum="1">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="25" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <realization id="94">    
+    <end type="SOURCE" refId="22"/>    
+    <end type="TARGET" refId="21"/>  
+  </realization>  
+  <generalization id="95">    
     <end type="SOURCE" refId="17"/>    
     <end type="TARGET" refId="27"/>  
   </generalization>  
-  <association id="103">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="104" name="inserer">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </attribute>      
-      <multiplicity id="105" minimum="0" maximum="1">        
-        <position height="0" width="0" x="36" y="64"/>      
-      </multiplicity>    
-    </end>    
-    <end type="TARGET" refId="12" navigable="true"/>    
-    <display labels="true" multiplicity="true"/>  
-  </association>  
-  <realization id="106">    
+  <realization id="96">    
     <end type="SOURCE" refId="2"/>    
     <end type="TARGET" refId="3"/>  
   </realization>  
-  <association id="107">    
-    <end type="SOURCE" refId="8" navigable="false">      
-      <attribute id="108" name="selecteur">        
+  <generalization id="97">    
+    <end type="SOURCE" refId="13"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="98">    
+    <end type="SOURCE" refId="16"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <association id="99">    
+    <end type="SOURCE" refId="1" navigable="false">      
+      <attribute id="100" name="commande">        
         <position height="0" width="0" x="36" y="64"/>      
       </attribute>      
-      <multiplicity id="109" minimum="0" maximum="1">        
+      <multiplicity id="101" minimum="0" maximum="1">        
         <position height="0" width="0" x="36" y="64"/>      
       </multiplicity>    
     </end>    
     <end type="TARGET" refId="12" navigable="true"/>    
     <display labels="true" multiplicity="true"/>  
   </association>  
+  <association id="102">    
+    <end type="SOURCE" refId="2" navigable="false">      
+      <attribute id="103" name="listEnregistreur">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </attribute>      
+      <multiplicity id="104" minimum="0" maximum="2147483647">        
+        <position height="0" width="0" x="0" y="0"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="7" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <association id="105">    
+    <end type="SOURCE" refId="8" navigable="false">      
+      <attribute id="106" name="coller">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </attribute>      
+      <multiplicity id="107" minimum="0" maximum="1">        
+        <position height="0" width="0" x="36" y="64"/>      
+      </multiplicity>    
+    </end>    
+    <end type="TARGET" refId="12" navigable="true"/>    
+    <display labels="true" multiplicity="true"/>  
+  </association>  
+  <generalization id="108">    
+    <end type="SOURCE" refId="14"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
+  <generalization id="109">    
+    <end type="SOURCE" refId="18"/>    
+    <end type="TARGET" refId="27"/>  
+  </generalization>  
   <classifier-display autosize="true" stereotype="true" package="true" initial-value="false" signature="true" 
     sort-features="false" accessors="true" visibility="true">    
     <attributes public="true" package="true" protected="true" private="true" static="true"/>    

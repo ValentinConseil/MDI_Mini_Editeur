@@ -24,8 +24,8 @@ import commands.Selection;
 import commands.StartEnregistrement;
 import commands.StopEnregistrement;
 import commands.Supprimer;
-import controleur.Buffer;
 import enregistreur.ListEnregistrementMacro;
+import modele.Buffer;
 
 public class IHMImplGraphique extends JFrame implements IHM {
 
