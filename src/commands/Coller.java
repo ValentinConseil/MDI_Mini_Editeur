@@ -2,11 +2,10 @@ package commands;
 
 import controleur.Buffer;
 
-public class Coller implements Command {
-	private Buffer buffer;
+public class Coller extends CommandBuffer {
 
 	public Coller(Buffer buffer) {
-		this.buffer = buffer;
+		super(buffer);
 	}
 
 	@Override
