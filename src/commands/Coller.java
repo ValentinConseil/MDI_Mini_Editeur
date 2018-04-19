@@ -14,9 +14,4 @@ public class Coller implements Command {
 		buffer.coller();
 	}
 
-	@Override
-	public void unexec() {
-		this.buffer.decoller();
-	}
-
 }

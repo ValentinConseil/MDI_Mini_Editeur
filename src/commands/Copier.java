@@ -13,10 +13,4 @@ public class Copier implements Command {
 	public void exec() {
 		buffer.copier();
 	}
-
-	@Override
-	public void unexec() {
-		this.buffer.decopier();
-	}
-
 }

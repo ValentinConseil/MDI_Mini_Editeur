@@ -14,10 +14,4 @@ public class Supprimer implements Command {
 	public void exec() {
 		this.buffer.supprimer();
 	}
-
-	@Override
-	public void unexec() {
-		this.buffer.desupprimer();
-	}
-
 }

@@ -13,10 +13,4 @@ public class Selection implements Command {
 	public void exec() {
 		buffer.selection();
 	}
-
-	@Override
-	public void unexec() {
-
-	}
-
 }

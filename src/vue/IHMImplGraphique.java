@@ -7,7 +7,6 @@ import java.awt.event.KeyListener;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
@@ -19,13 +18,9 @@ import commands.Command;
 import commands.Copier;
 import commands.Couper;
 import commands.Inserer;
-import commands.Rejouer;
 import commands.Selection;
-import commands.StartEnregistrement;
-import commands.StopEnregistrement;
 import commands.Supprimer;
 import controleur.Buffer;
-import enregistreur.ListEnregistrementMacro;
 
 public class IHMImplGraphique extends JFrame implements IHM {
 
@@ -36,18 +31,12 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	private Command inserer;
 	private Command selecteur;
 	private Command supprimer;
-	private Command rejouer;
-	private Command stopEnregistreur;
-	private Command startEnregistreur;
 
 	//TextArea de l'éditeur
 	private JTextArea textArea;
 
 	//Buffer de l'éditer
 	private Buffer buffer;
-
-	//Flag pour bloquer le listener de la liste des macros
-	private boolean activeMacro = true;
 
 	//Dernier caractère inséré au clavier
 	private String caractereInsere = "";
@@ -73,10 +62,6 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		this.selecteur = new Selection(buffer);
 
 		this.supprimer = new Supprimer(buffer);
-
-		this.rejouer = new Rejouer(buffer);
-		this.startEnregistreur = new StartEnregistrement(buffer);
-		this.stopEnregistreur = new StopEnregistrement(buffer);
 
 	}
 	
@@ -107,35 +92,6 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		JButton boutonCouper = new JButton("Couper");
 		firstLine.add(boutonCouper);
 
-		JButton boutonUndo = new JButton("Undo");
-		secondLine.add(boutonUndo);
-		JButton boutonRedo = new JButton("Redo");
-		secondLine.add(boutonRedo);
-
-		JButton boutonStartEnregistreur = new JButton("Start enregistrement");
-		secondLine.add(boutonStartEnregistreur);
-
-		JButton boutonStopEnregistreur = new JButton("Stop enregistrement");
-		boutonStopEnregistreur.setEnabled(false);
-		secondLine.add(boutonStopEnregistreur);
-
-		JComboBox<String> listeMacros;
-
-		
-		// Configuration de la liste des macros
-		listeMacros = new JComboBox<>();
-		secondLine.add(listeMacros);
-
-		listeMacros.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-
-				if (activeMacro) {
-					JComboBox<String> combo = (JComboBox) e.getSource();
-					buffer.setSelectedMacro(combo.getSelectedIndex());
-					rejouer.exec();
-				}
-			}
-		});
 
 		// Configuration du textArea
 		textArea = new JTextArea("", 1, 50);
@@ -195,41 +151,6 @@ public class IHMImplGraphique extends JFrame implements IHM {
 			public void actionPerformed(ActionEvent e) {
 				boutonColler.setEnabled(true);
 				couper.exec();
-			}
-		});
-
-		boutonUndo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				buffer.undo();
-			}
-		});
-
-		boutonRedo.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				buffer.redo();
-			}
-		});
-
-		boutonStartEnregistreur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boutonStartEnregistreur.setEnabled(false);
-				boutonStopEnregistreur.setEnabled(true);
-				buffer.newMacro();
-				startEnregistreur.exec();
-				listeMacros.setEnabled(false);
-			}
-		});
-
-		boutonStopEnregistreur.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				boutonStartEnregistreur.setEnabled(true);
-				boutonStopEnregistreur.setEnabled(false);
-				stopEnregistreur.exec();
-				activeMacro = false;
-				listeMacros.addItem("Macro " + buffer.getListEnregistreurMacro().getNbMacro());
-				activeMacro = true;
-				listeMacros.setEnabled(true);
-
 			}
 		});
 

@@ -10,9 +10,4 @@ public interface Command {
 	 * Exécute la commande
 	 */
 	public void exec();
-
-	/**
-	 * Annule l'effet de la commande
-	 */
-	public void unexec();
 }

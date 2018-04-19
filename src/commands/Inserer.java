@@ -13,10 +13,4 @@ public class Inserer implements Command {
 	public void exec() {
 		buffer.inserer();
 	}
-
-	@Override
-	public void unexec() {
-		this.buffer.deinserer();
-	}
-
 }
