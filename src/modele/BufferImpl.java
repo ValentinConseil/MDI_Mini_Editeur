@@ -1,5 +1,9 @@
-package controleur;
+package modele;
 
+import controleur.PressePapier;
+import controleur.PressePapierImpl;
+import controleur.Selecteur;
+import controleur.SelecteurImpl;
 import vue.IHM;
 
 public class BufferImpl implements Buffer {

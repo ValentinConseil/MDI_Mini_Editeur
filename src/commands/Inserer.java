@@ -1,6 +1,6 @@
 package commands;
 
-import controleur.Buffer;
+import modele.Buffer;
 
 public class Inserer implements Command {
 	private Buffer buffer;

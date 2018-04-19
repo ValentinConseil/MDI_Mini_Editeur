@@ -1,5 +1,5 @@
-import controleur.Buffer;
-import controleur.BufferImpl;
+import modele.Buffer;
+import modele.BufferImpl;
 import vue.IHM;
 import vue.IHMImplGraphique;
 

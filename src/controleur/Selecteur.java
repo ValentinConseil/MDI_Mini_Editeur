@@ -1,5 +1,7 @@
 package controleur;
 
+import modele.Buffer;
+
 /**
  * Selecteur de l'interface
  *

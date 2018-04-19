@@ -20,7 +20,7 @@ import commands.Couper;
 import commands.Inserer;
 import commands.Selection;
 import commands.Supprimer;
-import controleur.Buffer;
+import modele.Buffer;
 
 public class IHMImplGraphique extends JFrame implements IHM {
 

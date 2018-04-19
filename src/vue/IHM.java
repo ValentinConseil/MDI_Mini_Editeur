@@ -1,6 +1,6 @@
 package vue;
 
-import controleur.Buffer;
+import modele.Buffer;
 
 public interface IHM {
 

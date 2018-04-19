@@ -1,6 +1,6 @@
 package commands;
 
-import controleur.Buffer;
+import modele.Buffer;
 
 public class Coller implements Command {
 	private Buffer buffer;
