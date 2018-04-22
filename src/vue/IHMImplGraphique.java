@@ -35,9 +35,6 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	//TextArea de l'éditeur
 	private JTextArea textArea;
 
-	//Buffer de l'éditer
-	private Buffer buffer;
-
 	//Dernier caractère inséré au clavier
 	private String caractereInsere = "";
 
@@ -51,8 +48,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	 * @param Buffer buffer
 	 */
 	@Override
-	public void setBuffer(Buffer buffer) {
-		this.buffer = buffer;
+	public void setBufferReceiver(Buffer buffer) {
 
 		this.coller = new Coller(buffer);
 		this.copier = new Copier(buffer);
@@ -161,8 +157,8 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	 * Met à jour l'ihm en fonction du buffer
 	 */
 	@Override
-	public void update() {
-		textArea.setText(buffer.getText());
+	public void update(String text) {
+		textArea.setText(text);
 		textArea.getCaret().setVisible(true);
 	}
 

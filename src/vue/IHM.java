@@ -9,14 +9,13 @@ public interface IHM {
 	/**
 	 * Met à jour l'ihm en fonction du buffer
 	 */
-	public void update();
-
-
+	public void update(String text);
+	
 	/**
 	 * Configure le buffer et les commandes de l'ihm
 	 * @param Buffer buffer
 	 */
-	public void setBuffer(Buffer buffer);
+	public void setBufferReceiver(Buffer buffer);
 
 	
 	/**
