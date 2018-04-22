@@ -133,17 +133,20 @@ public class IHMImplGraphique extends JFrame implements IHM {
 
 		// Défnitions des listeners des boutons
 		boutonColler.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				coller.exec();
 			}
 		});
 		boutonCopier.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonColler.setEnabled(true);
 				copier.exec();
 			}
 		});
 		boutonCouper.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonColler.setEnabled(true);
 				couper.exec();
@@ -167,6 +170,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	//Getters et setters de l'ihm 
 	
 	
+	@Override
 	public void setCursorPosition(int position) {
 		textArea.setCaretPosition(position);
 		textArea.getCaret().setVisible(true);

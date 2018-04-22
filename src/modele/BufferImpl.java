@@ -21,22 +21,25 @@ public class BufferImpl implements Buffer {
 
 	// Fonction appelées par les commandes
 
+	@Override
 	public void copier() {
 
 		pressePapier.ecrire(selecteur.lire());
 
 	}
 
+	@Override
 	public void couper() {
 
 		pressePapier.ecrire(selecteur.lire());
 		content = content.substring(0, selecteur.getDebut()) + content.substring(selecteur.getFin(), content.length());
 
 		int newCursorPosition = selecteur.getDebut();
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 	}
 
+	@Override
 	public void coller() {
 
 		int newCursorPosition;
@@ -45,11 +48,12 @@ public class BufferImpl implements Buffer {
 		content = content.substring(0, selecteur.getDebut()) + pressePapier.lire()
 					+ content.substring(selecteur.getDebut(), content.length());
 		
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 
 	}
 
+	@Override
 	public void inserer() {
 
 		int position = selecteur.getDebut();
@@ -58,11 +62,12 @@ public class BufferImpl implements Buffer {
 		content = new StringBuilder(content).insert(position, character).toString();
 
 		int newCursorPosition = selecteur.getFin() + 1;
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 
 	}
 
+	@Override
 	public void selection() {
 		selecteur.setDebut(ihm.getDebutSelection());
 		selecteur.setFin(ihm.getFinSelection());
@@ -73,12 +78,14 @@ public class BufferImpl implements Buffer {
 	 * 
 	 * @return
 	 */
+	@Override
 	public String getText() {
 		return content;
 	}
 
 
 
+	@Override
 	public void supprimer() {
 
 		int startPosition = selecteur.getDebut();
@@ -96,7 +103,7 @@ public class BufferImpl implements Buffer {
 			
 			content = content.substring(0,startPosition) + content.substring(endPosition, content.length());
 			
-			ihm.update();
+			ihm.update(content);
 			ihm.setCursorPosition(startPosition);
 		}
 	}

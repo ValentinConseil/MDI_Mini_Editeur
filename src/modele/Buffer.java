@@ -1,7 +1,5 @@
 package modele;
 
-import commands.Command;
-
 public interface Buffer {
 	
 	// Fonction appelées par les commandes
