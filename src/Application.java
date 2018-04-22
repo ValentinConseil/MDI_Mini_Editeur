@@ -10,6 +10,6 @@ public class Application {
 		IHM ihm = new IHMImplGraphique();
 		Buffer buffer = new BufferImpl(ihm);
 
-		ihm.setBuffer(buffer);
+		ihm.setBufferReceiver(buffer);
 	}
 }

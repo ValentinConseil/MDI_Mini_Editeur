@@ -73,15 +73,22 @@ public interface Buffer {
 	public EnregistreurMacro newMacro();
 
 	/**
-	 * Retourne la liste des macros
-	 * @return ListEnregistrementMacro
+	 *  
+	 * @return Retourne le nombre de macro dans le buffer
 	 */
-	public ListEnregistrementMacro getListEnregistreurMacro();
-
+	public int getNbMacro();
+	
 	/**
 	 * Permet à l'ihm de définir l'interface sélectionnée
 	 * @param int selectedIndex
 	 */
 	public void setSelectedMacro(int selectedIndex);
+
+	/**
+	 * Retourne la macro désignée par l'index i
+	 * @param i
+	 * @return
+	 */
+	public EnregistreurMacro getMacro(int i);
 
 }

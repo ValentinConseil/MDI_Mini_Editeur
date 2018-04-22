@@ -10,7 +10,8 @@ public class StartEnregistrement extends CommandBuffer {
 
 	@Override
 	public void exec() {
-		this.buffer.getListEnregistreurMacro().getMacro(buffer.getListEnregistreurMacro().getNbMacro() - 1)
+		this.buffer.newMacro();
+		this.buffer.getMacro(buffer.getNbMacro() - 1)
 				.startEnregistrement();
 	}
 

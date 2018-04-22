@@ -71,7 +71,7 @@ public class BufferImpl implements Buffer {
 		enregistreurUndoRedo.addCommand(createMemento(new Couper(this), deletedCharacters), !rejoue);
 
 		int newCursorPosition = selecteur.getDebut();
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 	}
 
@@ -89,7 +89,7 @@ public class BufferImpl implements Buffer {
 
 		enregistreurUndoRedo.addCommand(createMemento(new Coller(this), pressePapier.lire()), !rejoue);
 
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 
 	}
@@ -114,7 +114,7 @@ public class BufferImpl implements Buffer {
 		enregistreurUndoRedo.addCommand(createMemento(new Inserer(this), character), !rejoue);
 
 		int newCursorPosition = selecteur.getFin() + 1;
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 
 	}
@@ -128,6 +128,7 @@ public class BufferImpl implements Buffer {
 	 * Rejoue la macro selectionnée
 	 */
 	public void rejouer() {
+		this.selectedMacro = ihm.getSelectedMacro();
 		listMacro.getMacro(selectedMacro).rejouer(this);
 	}
 
@@ -212,7 +213,7 @@ public class BufferImpl implements Buffer {
 		content = content.substring(0, selecteur.getDebut()) + content.substring(
 				selecteur.getDebut() + pressePapier.lire().length(), content.length());
 		int newCursorPosition = selecteur.getFin();
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 	}
 
@@ -220,7 +221,7 @@ public class BufferImpl implements Buffer {
 		content = content.substring(0, selecteur.getDebut()) + pressePapier.lire()
 				+ content.substring(selecteur.getDebut(), content.length());
 		int newCursorPosition = selecteur.getDebut() + pressePapier.lire().length();
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 	}
 
@@ -229,7 +230,7 @@ public class BufferImpl implements Buffer {
 		content = content.substring(0, selecteur.getDebut())
 				+ content.substring(selecteur.getDebut() + 1, content.length());
 		int newCursorPosition = selecteur.getDebut();
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(newCursorPosition);
 
 	}
@@ -248,7 +249,7 @@ public class BufferImpl implements Buffer {
 
 		content = new StringBuilder(content).insert(positionStart, character).toString();
 
-		ihm.update();
+		ihm.update(content);
 		ihm.setCursorPosition(positionEnd);
 	}
 
@@ -299,7 +300,7 @@ public class BufferImpl implements Buffer {
 			// On l'ajoute à l'historique des commandes
 			enregistreurUndoRedo.addCommand(createMemento(new Supprimer(this), deletedCharacters), !rejoue);
 
-			ihm.update();
+			ihm.update(content);
 			ihm.setCursorPosition(startPosition);
 		}
 	}
@@ -307,6 +308,16 @@ public class BufferImpl implements Buffer {
 
 	public void setSelectedMacro(int selectedIndex) {
 		this.selectedMacro = selectedIndex;
+	}
+
+	@Override
+	public int getNbMacro() {
+		return this.listMacro.getNbMacro();
+	}
+
+	@Override
+	public EnregistreurMacro getMacro(int i) {
+		return listMacro.getMacro(i);
 	}
 
 }

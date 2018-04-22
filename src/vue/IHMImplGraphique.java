@@ -19,11 +19,13 @@ import commands.Command;
 import commands.Copier;
 import commands.Couper;
 import commands.Inserer;
+import commands.Redo;
 import commands.Rejouer;
 import commands.Selection;
 import commands.StartEnregistrement;
 import commands.StopEnregistrement;
 import commands.Supprimer;
+import commands.Undo;
 import enregistreur.ListEnregistrementMacro;
 import modele.Buffer;
 
@@ -39,12 +41,13 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	private Command rejouer;
 	private Command stopEnregistreur;
 	private Command startEnregistreur;
+	private Command redo;
+	private Command undo;
 
+	private int selectedMacro;
+	
 	//TextArea de l'éditeur
 	private JTextArea textArea;
-
-	//Buffer de l'éditer
-	private Buffer buffer;
 
 	//Flag pour bloquer le listener de la liste des macros
 	private boolean activeMacro = true;
@@ -62,9 +65,8 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	 * @param Buffer buffer
 	 */
 	@Override
-	public void setBuffer(Buffer buffer) {
-		this.buffer = buffer;
-
+	public void setBufferReceiver(Buffer buffer) {
+		
 		this.coller = new Coller(buffer);
 		this.copier = new Copier(buffer);
 
@@ -78,6 +80,9 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		this.startEnregistreur = new StartEnregistrement(buffer);
 		this.stopEnregistreur = new StopEnregistrement(buffer);
 
+		
+		this.undo = new Undo(buffer);
+		this.redo = new Redo(buffer);
 	}
 	
 	/**
@@ -131,7 +136,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 
 				if (activeMacro) {
 					JComboBox<String> combo = (JComboBox) e.getSource();
-					buffer.setSelectedMacro(combo.getSelectedIndex());
+					selectedMacro = combo.getSelectedIndex();
 					rejouer.exec();
 				}
 			}
@@ -200,13 +205,13 @@ public class IHMImplGraphique extends JFrame implements IHM {
 
 		boutonUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buffer.undo();
+				undo.exec();
 			}
 		});
 
 		boutonRedo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				buffer.redo();
+				redo.exec();
 			}
 		});
 
@@ -214,7 +219,6 @@ public class IHMImplGraphique extends JFrame implements IHM {
 			public void actionPerformed(ActionEvent e) {
 				boutonStartEnregistreur.setEnabled(false);
 				boutonStopEnregistreur.setEnabled(true);
-				buffer.newMacro();
 				startEnregistreur.exec();
 				listeMacros.setEnabled(false);
 			}
@@ -226,7 +230,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 				boutonStopEnregistreur.setEnabled(false);
 				stopEnregistreur.exec();
 				activeMacro = false;
-				listeMacros.addItem("Macro " + buffer.getListEnregistreurMacro().getNbMacro());
+				listeMacros.addItem("Macro " + new Integer(listeMacros.getItemCount()+1));
 				activeMacro = true;
 				listeMacros.setEnabled(true);
 
@@ -240,8 +244,8 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	 * Met à jour l'ihm en fonction du buffer
 	 */
 	@Override
-	public void update() {
-		textArea.setText(buffer.getText());
+	public void update(String text) {
+		textArea.setText(text);
 		textArea.getCaret().setVisible(true);
 	}
 
@@ -269,5 +273,10 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	@Override
 	public int getFinSelection() {
 		return textArea.getSelectionEnd();
+	}
+	
+	@Override
+	public int getSelectedMacro() {
+		return this.selectedMacro;
 	}
 }
