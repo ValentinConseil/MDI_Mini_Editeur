@@ -19,6 +19,7 @@ public class ListEnregistrementMacroImpl implements ListEnregistrementMacro {
 	 * Ajoute un memento à la dernière macro
 	 * @param MementoCommande enregistrement
 	 */
+	@Override
 	public void addEnregistrement(MementoCommande enr) {
 		if (listEnregistreur.size() > 0) {
 			if (listEnregistreur.get(listEnregistreur.size() - 1).isEnregistrement_en_cours()) {
@@ -32,6 +33,7 @@ public class ListEnregistrementMacroImpl implements ListEnregistrementMacro {
 	 * Retourne la macro 
 	 * @param int idMacro
 	 */
+	@Override
 	public EnregistreurMacro getMacro(int idMacro) {
 		return listEnregistreur.get(idMacro);
 	}
@@ -41,6 +43,7 @@ public class ListEnregistrementMacroImpl implements ListEnregistrementMacro {
 	 * 
 	 * @return int nombre de macro
 	 */
+	@Override
 	public int getNbMacro() {
 		return listEnregistreur.size();
 	}
@@ -50,6 +53,7 @@ public class ListEnregistrementMacroImpl implements ListEnregistrementMacro {
 	 * Créer une nouvelle macro
 	 * 
 	 */
+	@Override
 	public EnregistreurMacro newMacro() {
 		listEnregistreur.add(new EnregistreurMacroImpl());
 		return listEnregistreur.get(listEnregistreur.size() - 1);
@@ -59,6 +63,7 @@ public class ListEnregistrementMacroImpl implements ListEnregistrementMacro {
 	 * Indique si la dernière macro est en cours d'enregistrement
 	 * @boolean recording?
 	 */
+	@Override
 	public boolean isRecording() {
 		if (listEnregistreur.isEmpty()) {
 			return false;

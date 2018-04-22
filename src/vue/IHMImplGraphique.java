@@ -26,7 +26,6 @@ import commands.StartEnregistrement;
 import commands.StopEnregistrement;
 import commands.Supprimer;
 import commands.Undo;
-import enregistreur.ListEnregistrementMacro;
 import modele.Buffer;
 
 public class IHMImplGraphique extends JFrame implements IHM {
@@ -132,6 +131,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		secondLine.add(listeMacros);
 
 		listeMacros.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 
 				if (activeMacro) {
@@ -186,17 +186,20 @@ public class IHMImplGraphique extends JFrame implements IHM {
 
 		// Défnitions des listeners des boutons
 		boutonColler.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				coller.exec();
 			}
 		});
 		boutonCopier.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonColler.setEnabled(true);
 				copier.exec();
 			}
 		});
 		boutonCouper.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonColler.setEnabled(true);
 				couper.exec();
@@ -204,18 +207,21 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		});
 
 		boutonUndo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				undo.exec();
 			}
 		});
 
 		boutonRedo.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				redo.exec();
 			}
 		});
 
 		boutonStartEnregistreur.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonStartEnregistreur.setEnabled(false);
 				boutonStopEnregistreur.setEnabled(true);
@@ -225,6 +231,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 		});
 
 		boutonStopEnregistreur.addActionListener(new ActionListener() {
+			@Override
 			public void actionPerformed(ActionEvent e) {
 				boutonStartEnregistreur.setEnabled(true);
 				boutonStopEnregistreur.setEnabled(false);
@@ -254,6 +261,7 @@ public class IHMImplGraphique extends JFrame implements IHM {
 	//Getters et setters de l'ihm 
 	
 	
+	@Override
 	public void setCursorPosition(int position) {
 		textArea.setCaretPosition(position);
 		textArea.getCaret().setVisible(true);

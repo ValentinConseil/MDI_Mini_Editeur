@@ -20,6 +20,7 @@ public class EnregistreurUndoRedoImpl implements EnregistreurUndoRedo {
 	 * @param MementoCommande
 	 * @param boolean Supprimer les redo 
 	 */
+	@Override
 	public void addCommand(MementoCommande enr, boolean delete) {
 
 		listUndo.add(enr);
@@ -34,6 +35,7 @@ public class EnregistreurUndoRedoImpl implements EnregistreurUndoRedo {
 	 * Retourne le memento le plus récent des undo
  	 * @return MementoCommande
 	 */
+	@Override
 	public MementoCommande getUndo() {
 
 		MementoCommande enr = listUndo.remove(listUndo.size() - 1);
@@ -47,6 +49,7 @@ public class EnregistreurUndoRedoImpl implements EnregistreurUndoRedo {
 	 * Retourne le memento 
 	 * @return MementoCommande
 	 */
+	@Override
 	public MementoCommande getRedo() {
 
 		MementoCommande enr = listRedo.remove(listRedo.size() - 1);
@@ -58,6 +61,7 @@ public class EnregistreurUndoRedoImpl implements EnregistreurUndoRedo {
 	 * Indique si la liste contient une commande dans l'historique
 	 * @return boolean 
 	 */
+	@Override
 	public boolean UndoPossible() {
 		return !listUndo.isEmpty();
 	}
@@ -65,6 +69,7 @@ public class EnregistreurUndoRedoImpl implements EnregistreurUndoRedo {
 	 * Indique si la liste contient une commande dans l'historique
 	 * @return boolean 
 	 */
+	@Override
 	public boolean RedoPossible() {
 		return !listRedo.isEmpty();
 	}

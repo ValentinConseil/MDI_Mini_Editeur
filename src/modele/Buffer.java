@@ -2,7 +2,6 @@ package modele;
 
 import commands.Command;
 import enregistreur.EnregistreurMacro;
-import enregistreur.ListEnregistrementMacro;
 import enregistreur.MementoCommande;
 
 public interface Buffer {
